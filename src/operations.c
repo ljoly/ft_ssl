@@ -6,28 +6,28 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 18:38:52 by ljoly             #+#    #+#             */
-/*   Updated: 2018/07/05 19:09:45 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/07/09 18:31:25 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-int32_t f_i(int32_t b, int32_t c, int32_t d)
+uint32_t f_i(uint32_t b, uint32_t c, uint32_t d)
 {
     return (c ^ (b | ~d));
 }
 
-int32_t f_h(int32_t b, int32_t c, int32_t d)
+uint32_t f_h(uint32_t b, uint32_t c, uint32_t d)
 {
     return (b ^ c ^ d);
 }
 
-int32_t f_g(int32_t b, int32_t c, int32_t d)
+uint32_t f_g(uint32_t b, uint32_t c, uint32_t d)
 {
     return ((b & d) | (c & ~d));
 }
 
-int32_t f_f(int32_t b, int32_t c, int32_t d)
+uint32_t f_f(uint32_t b, uint32_t c, uint32_t d)
 {
     return ((b & c) | (~B & d));
 }
