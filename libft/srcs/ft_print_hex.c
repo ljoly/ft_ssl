@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 16:20:16 by ljoly             #+#    #+#             */
-/*   Updated: 2017/02/24 16:20:17 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/07/10 17:20:20 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ void		ft_print_hex(size_t nb, int upper)
 {
 	char	*tab;
 
-	if (upper == 1)
-		tab = "0123456789ABCDEF";
-	else
-		tab = "0123456789abcdef";
+    tab = (upper == 1) ? HEX_UP : HEX;
 	if (nb < 16)
 		ft_putchar(tab[nb]);
 	if (nb >= 16)

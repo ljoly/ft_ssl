@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 16:14:13 by ljoly             #+#    #+#             */
-/*   Updated: 2018/03/06 14:36:02 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/07/10 17:13:42 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ typedef char			t_bool;
 
 # define TRUE           1
 # define FALSE          0
+
+# define HEX 			"0123456789abcdef"
+# define HEX_UP 		"0123456789ABCDEF"
 
 typedef struct	s_list
 {
