@@ -6,7 +6,7 @@
 #    By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/24 16:13:48 by ljoly             #+#    #+#              #
-#    Updated: 2018/07/03 20:08:36 by ljoly            ###   ########.fr        #
+#    Updated: 2018/07/12 16:51:08 by ljoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC_LIBFT = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 	  ft_strjoin_and_free.c get_next_line.c ft_chrpos.c ft_putnstr.c \
 	  ft_putnbr_sst.c ft_putnbr_st.c ft_power.c ft_print_hex.c ft_abs.c \
 	  ft_print_octal.c ft_putwchar.c ft_putwstr.c ft_wstrlen.c ft_wchar_size.c \
-	  ft_wstr_size.c ft_print_binary.c ft_count_w.c ft_atoss.c
+	  ft_wstr_size.c ft_print_binary.c ft_count_w.c ft_atoss.c ft_atohex.c
 
 SRC_PRINTF = deal_flags_char.c deal_flags_int.c deal_with_it_bro.c \
 			 deal_with_it_bro_2.c ft_printf.c get_info.c initialize_struct.c \
