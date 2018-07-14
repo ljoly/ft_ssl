@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:03:23 by ljoly             #+#    #+#             */
-/*   Updated: 2018/07/12 19:08:32 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/07/14 17:18:26 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct  s_env
     int         input_bitsize;
     char        *padding;
 	char        *padded_msg;
+    int         blocks;
 }				t_env;
 
 void		    ft_md5(char *s);

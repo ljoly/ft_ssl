@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 19:13:19 by ljoly             #+#    #+#             */
-/*   Updated: 2018/07/12 19:15:17 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/07/14 17:29:05 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void ft_md5(char *s)
 {
     t_env e;
 
-
     e.input = s;
     // input to hex    
     if (!(e.padded_msg = ft_atohex(e.input, FALSE)))
@@ -56,8 +55,9 @@ void ft_md5(char *s)
     e.input_bitsize = ft_strlen(s) * 8;
     // get binary padding
     e.padding = get_padding(e.input_bitsize);
-
+    e.blocks = (e.input_bitsize + ft_strlen(e.padding) + 64) / 512;
     ft_printf("padding = %s\n", e.padding);
     ft_printf("padding size = %zu\n", ft_strlen(e.padding));
+    ft_printf("blocks = %d\n", e.blocks);
     add_padding(&e);
 }
