@@ -6,58 +6,37 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 19:13:19 by ljoly             #+#    #+#             */
-/*   Updated: 2018/07/14 17:29:05 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/09/12 19:19:16 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static void add_padding(t_env *e)
+static void     get_format(t_env *e)
 {
-    // add 64-bit size
-    ft_printf("msg = %s\n", e->padded_msg);
-}
-
-static char *get_padding(int size)
-{
-    int i;
-    int pad;
-    char *padding;
-
-    pad = 512;
-    if (size % 512 != 0)
+    // add bitsize of len
+    e->input_bitsize += 64;
+    //
+    e->blocks = 1 + e->input_bitsize / 512;
+    ft_printf("blocks = %d\n", e->blocks);
+    e->padding_bitsize = e->blocks * 512 - e->input_bitsize % 512;
+    ft_printf("padding size = %d\n", e->padding_bitsize);
+    if (e->blocks > 1)
     {
-        pad = 448 - size % 512;
-        if (pad <= 0)
-            pad += 512;
+        e->padding_bitsize -= 512 * (e->blocks - 1);
     }
-    padding = NULL;
-    if (!(padding = (char *)ft_memalloc(sizeof(char) * pad)))
-        ft_err(MALLOC);
-    padding[0] = '1';
-    i = 1;
-    while (i < pad)
-    {
-        padding[i] = '0';
-        i++;
-    }
-    return (padding);
+    ft_printf("padding size = %d\n", e->padding_bitsize);
 }
 
 void ft_md5(char *s)
 {
-    t_env e;
+    t_env       e;
+    uint32_t    message[16];
 
     e.input = s;
-    // input to hex    
-    if (!(e.padded_msg = ft_atohex(e.input, FALSE)))
-        ft_err(MALLOC);
     e.input_bitsize = ft_strlen(s) * 8;
-    // get binary padding
-    e.padding = get_padding(e.input_bitsize);
-    e.blocks = (e.input_bitsize + ft_strlen(e.padding) + 64) / 512;
-    ft_printf("padding = %s\n", e.padding);
-    ft_printf("padding size = %zu\n", ft_strlen(e.padding));
-    ft_printf("blocks = %d\n", e.blocks);
-    add_padding(&e);
+    ft_printf("input len = %zu\n", ft_strlen(s));
+    ft_printf("input bitsize = %d\n", e.input_bitsize);
+    get_format(&e);
+    message[0] = s[0];
 }
