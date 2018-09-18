@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:03:23 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/12 16:05:28 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/09/18 14:26:41 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ uint32_t        g_s[64];
 typedef struct  s_env
 {
     char        *input;
+    size_t      input_len;
     uint32_t    padding_bitsize;
     uint32_t    input_bitsize;
-    int         blocks;
+    size_t      blocks;
+    uint32_t    *meta_block;
 }				t_env;
 
 void		    ft_md5(char *s);
