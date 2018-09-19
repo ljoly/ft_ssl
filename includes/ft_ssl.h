@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:03:23 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/18 14:26:41 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/09/19 14:51:55 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct  s_env
 }				t_env;
 
 void		    ft_md5(char *s);
+void            get_format(t_env *e);
+void            build_meta(t_env *e);
 
 uint32_t	    f_f(uint32_t b, uint32_t c, uint32_t d);
 uint32_t	    f_g(uint32_t b, uint32_t c, uint32_t d);

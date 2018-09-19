@@ -6,7 +6,7 @@
 #    By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/03 19:54:48 by ljoly             #+#    #+#              #
-#    Updated: 2018/07/12 19:08:58 by ljoly            ###   ########.fr        #
+#    Updated: 2018/09/19 14:52:58 by ljoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = ft_ssl
 LINK_NAME = libft_malloc.so
 
 
-SRC = main.c md5.c operations.c tables.c error.c \
+SRC = main.c md5.c operations.c tables.c error.c get_format.c build_meta.c \
 
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
