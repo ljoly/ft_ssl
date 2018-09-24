@@ -6,17 +6,11 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 14:50:41 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/20 16:56:33 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/09/24 18:28:03 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
-
-// static uint32_t reverse_bits(uint32_t value)
-// {
-//     return (value & 0x000000FFU) << 24 | (value & 0x0000FF00U) << 8 |
-//         (value & 0x00FF0000U) >> 8 | (value & 0xFF000000U) >> 24;
-// }
 
 static void     add_size(t_env *e)
 {

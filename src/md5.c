@@ -6,11 +6,17 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 19:13:19 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/20 17:47:26 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/09/24 19:30:15 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
+
+static uint32_t reverse_bits(uint32_t value)
+{
+    return (value & 0x000000FFU) << 24 | (value & 0x0000FF00U) << 8 |
+        (value & 0x00FF0000U) >> 8 | (value & 0xFF000000U) >> 24;
+}
 
 static uint32_t left_rotate(uint32_t x, uint32_t c)
 {
@@ -68,7 +74,6 @@ void static hash_meta(uint32_t *meta, size_t blocks)
             m.c = m.b;
             m.b += left_rotate(m.f, g_s[i]);
             i++;
-            printf("A = %u B = %u C = %u D = %u\n", m.a, m.b, m.c, m.d);
         }
         m.a0 += m.a;
         m.b0 += m.b;
@@ -76,20 +81,24 @@ void static hash_meta(uint32_t *meta, size_t blocks)
         m.d0 += m.d;
         j++;
     }
+    m.a0 = reverse_bits(m.a0);
+    m.b0 = reverse_bits(m.b0);
+    m.c0 = reverse_bits(m.c0);
+    m.d0 = reverse_bits(m.d0);
     printf("%.8x%.8x%.8x%.8x\n", m.a0, m.b0, m.c0, m.d0);
 }
 
-void static print(t_env e)
-{
-    size_t i;
+// void static print(t_env e)
+// {
+//     size_t i;
 
-    i = 0;
-    while (i < e.blocks * 16)
-    {
-        printf("%u\n", e.meta_block[i]);
-        i++;
-    }
-}
+//     i = 0;
+//     while (i < e.blocks * 16)
+//     {
+//         printf("%u\n", e.meta_block[i]);
+//         i++;
+//     }
+// }
 
 void ft_md5(char *input)
 {
@@ -102,6 +111,6 @@ void ft_md5(char *input)
     ft_printf("input bitsize = %d\n", e.input_bitsize);
     get_format(&e);
     build_meta(&e);
-    print(e);
+    // print(e);
     hash_meta(e.meta_block, e.blocks);
 }
