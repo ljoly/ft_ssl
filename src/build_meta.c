@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 14:50:41 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/24 18:28:03 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/09/24 19:48:35 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void            build_meta(t_env *e)
     size_t      k;
     char        buff[5];
 
-    e->meta_block = (uint32_t*)ft_memalloc(sizeof(uint32_t) * e->blocks * 16);
+    if (!(e->meta_block = (uint32_t*)ft_memalloc(sizeof(uint32_t) * e->blocks * 16)))
+        ft_err(MALLOC);
     i = 0;
     k = 0;
     while (i < e->input_len)

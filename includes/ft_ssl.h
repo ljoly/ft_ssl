@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:03:23 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/20 17:46:17 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/09/25 16:51:02 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,17 @@
 # include "libft.h"
 # include "error.h"
 
+# define MD5_OUTPUT_SIZE 32
+# define SHA2_OUTPUT_SIZE 64
+
 # define INIT_A 0x67452301
 # define INIT_B 0xEFCDAB89
 # define INIT_C 0x98BADCFE
 # define INIT_D 0x10325476
 
-// tables used to build the message digest
+/*
+** tables used to build the message digest
+*/
 uint32_t        g_T[64];
 uint32_t        g_s[64];
 
@@ -52,10 +57,5 @@ typedef struct  s_md5
 void		    ft_md5(char *s);
 void            get_format(t_env *e);
 void            build_meta(t_env *e);
-
-uint32_t	    f_f(uint32_t b, uint32_t c, uint32_t d);
-uint32_t	    f_g(uint32_t b, uint32_t c, uint32_t d);
-uint32_t		f_h(uint32_t b, uint32_t c, uint32_t d);
-uint32_t		f_i(uint32_t b, uint32_t c, uint32_t d);
 
 #endif
