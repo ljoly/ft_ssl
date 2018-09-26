@@ -6,7 +6,7 @@
 #    By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/03 19:54:48 by ljoly             #+#    #+#              #
-#    Updated: 2018/09/20 17:02:46 by ljoly            ###   ########.fr        #
+#    Updated: 2018/09/26 20:11:33 by ljoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,10 @@ LINK_NAME = libft_malloc.so
 
 
 SRC = main.c md5.c tables.c error.c get_format.c build_meta.c \
+	parsing/parser_init.c
 
 SRC_PATH = ./src/
+
 OBJ_PATH = ./obj/
 
 OBJ = $(addprefix $(OBJ_PATH), $(SRC:.c=.o))

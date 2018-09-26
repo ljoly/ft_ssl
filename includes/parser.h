@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/09 18:05:45 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/26 20:50:17 by ljoly            ###   ########.fr       */
+/*   Created: 2018/09/26 20:43:00 by ljoly             #+#    #+#             */
+/*   Updated: 2018/09/26 21:01:51 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#ifndef PARSER_H
+# define PARSER_H
 
-typedef enum		e_sys
+# include "libft.h"
+
+typedef enum    e_run
 {
-    OPEN,
-    READ,
-    MALLOC,
-}					t_sys;
+    START,
+    USE,
+}               t_run;
 
-typedef enum        e_usage
+typedef struct  s_arg
 {
-    NOT_A_FILE,
-    NOT_A_STRING,
-    NOT_A_HASH,
-}                   t_usage;
+    t_bool      md5;
+    t_bool      p;
+    t_bool      q;
+    t_bool      r;
+    t_bool      s;
+    char        *input;
+}				t_arg;
 
-void                sys_err(t_sys err_code);
-void                usage_err(t_usage err_code, cahr *arg);
+void	        handle_args(int action, char *str, t_arg *arg);
 
 #endif

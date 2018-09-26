@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:03:23 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/25 16:51:02 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/09/26 20:45:02 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 # define FT_SSL_H
 
 # include "libft.h"
+# include "parser.h"
 # include "error.h"
 
-# define MD5_OUTPUT_SIZE 32
-# define SHA2_OUTPUT_SIZE 64
+# define MD5_PRINT_LEN 32
+# define SHA2_PRINT_LEN 64
 
 # define INIT_A 0x67452301
 # define INIT_B 0xEFCDAB89
