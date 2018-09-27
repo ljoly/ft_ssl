@@ -6,27 +6,30 @@
 #    By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/03 19:54:48 by ljoly             #+#    #+#              #
-#    Updated: 2018/09/26 20:11:33 by ljoly            ###   ########.fr        #
+#    Updated: 2018/09/27 19:20:46 by ljoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ssl
-LINK_NAME = libft_malloc.so
 
+SRC_SSL = main.c md5.c tables.c error.c get_format.c build_meta.c \
 
-SRC = main.c md5.c tables.c error.c get_format.c build_meta.c \
-	parsing/parser_init.c
+SRC_PARSING = parser.c state_a.c lex_hashname.c lex_flags_pqr.c lex_file.c \
+			lex_blank.c \
 
-SRC_PATH = ./src/
+SSL_PATH = ./src/
+PARSING_PATH = ./src/parsing/
 
-OBJ_PATH = ./obj/
+SRCS = $(addprefix $(SSL_PATH), $(SRC_SSL)) \
+		$(addprefix $(PARSING_PATH), $(SRC_PARSING)) \
 
-OBJ = $(addprefix $(OBJ_PATH), $(SRC:.c=.o))
+OBJ = $(SRCS:.c=.o)
+
 
 FLAGS = -Wall -Werror -Wextra
 LIBFT = ./libft/
 LIBFT_HEADER = ./libft/includes
-HEADER = ./includes
+HEADER = ./includes/
 
 RED=\033[1;31m
 GREEN=\033[1;32m
@@ -43,15 +46,14 @@ $(NAME): obj $(OBJ)
 obj:
 	# @make -C $(LIBFT)
 	@printf "\n\x1B[38;5;208mCompiling $(NAME)...\n\x1b[37m"
-	@mkdir -p $(OBJ_PATH)
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+%.o: %.c
 	gcc $(FLAGS) -I $(LIBFT) -I $(HEADER) -I $(LIBFT_HEADER) -o $@ -c $<
 	@printf "\e[38;5;208m▒\e[0m"
 
 clean:
 	# @make -C $(LIBFT) clean
-	@rm -rf $(OBJ_PATH)
+	@rm -rf $(OBJ)
 	@printf "$(RED)[-]$(NC)Obj files deleted\n"
 
 fclean: clean

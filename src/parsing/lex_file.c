@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   lex_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/09 18:05:45 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/27 14:46:45 by ljoly            ###   ########.fr       */
+/*   Created: 2018/09/27 19:04:32 by ljoly             #+#    #+#             */
+/*   Updated: 2018/09/27 19:06:52 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "ft_ssl.h"
 
-typedef enum		e_sys
+t_bool          lex_file(char *str, t_arg *arg)
 {
-    OPEN,
-    READ,
-    MALLOC,
-}					t_sys;
-
-typedef enum        e_usage
-{
-    NOT_A_FILE,
-    NOT_A_STRING,
-    NOT_A_HASH,
-}                   t_usage;
-
-void                err_sys(t_sys err_code);
-void                err_usage(t_usage err_code, char *arg);
-
-#endif
+    return (FALSE);
+}

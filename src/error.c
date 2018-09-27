@@ -6,13 +6,13 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 18:08:52 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/26 20:50:05 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/09/27 14:46:22 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-void usage_err(t_usage err_code, char *arg)
+void err_usage(t_usage err_code, char *arg)
 {
 	if (err_code == NOT_A_HASH)
 	{
@@ -33,7 +33,7 @@ void usage_err(t_usage err_code, char *arg)
 	}
 }
 
-void sys_err(t_sys err_code)
+void err_sys(t_sys err_code)
 {
 	if (err_code == OPEN)
 		ft_putendl_fd("ERROR: while opening file", 2);
