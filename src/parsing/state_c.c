@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_blank.c                                        :+:      :+:    :+:   */
+/*   state_c.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/27 19:21:18 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/27 19:22:00 by ljoly            ###   ########.fr       */
+/*   Created: 2018/09/28 20:35:29 by ljoly             #+#    #+#             */
+/*   Updated: 2018/09/28 21:20:30 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-t_bool      lex_blank(char *str, t_arg *arg)
+/*
+** a string
+*/
+void            *state_c(char *arg, t_flags *flags)
 {
-    if (str == NULL)
-    return (FALSE);
+    flags->input = arg;
+    flags->s = FALSE;
+    return (&(state_a));
 }

@@ -6,32 +6,32 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 20:01:27 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/27 19:26:31 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/09/28 21:02:09 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static void		init_arg(t_arg *arg)
+static void			*state_final(char *arg, t_flags *flags)
 {
-	arg->md5 = FALSE;
-	arg->p = FALSE;
-	arg->q = FALSE;
-	arg->r = FALSE;
-	arg->s = FALSE;
-	arg->file_opened = FALSE;
-	arg->input = NULL;
+	if (flags->s)
+		err_usage(NO_STRING, flags);
+	else
+		// read STDIN
+	(void)arg;
+	(void)flags;
+	return (NULL);
 }
 
-static void			*state_initial(char *str, t_arg *arg)
+static void			*state_initial(char *arg, t_flags *flags)
 {
-	if (lex_hashname(str, arg))
+	if (lex_hashname(arg, flags))
 	{
 		return (&state_a);
 	}
 	else
 	{
-		err_usage(NOT_A_HASH, NULL);
+		err_usage(NOT_A_HASH, flags);
 	}
 	return (NULL);
 }
@@ -39,17 +39,21 @@ static void			*state_initial(char *str, t_arg *arg)
 /*
 ** Parsing the arguments using a state-machine
 */
-void	    		handle_args(int action, char *str, t_arg *arg)
+void	    		handle_args(int action, char *arg, t_flags *flags)
 {
-	static void		*(*state)(char *str, t_arg *arg);
+	static void		*(*state)(char *arg, t_flags *flags);
 
-	init_arg(arg);
 	if (action == START)
 	{
 		state = &(state_initial);
 	}
 	else if (action == USE)
 	{
-		state = state(str, arg);
+		state = state(arg, flags);
+	}
+	else if (action == END)
+	{
+		if (!flags->hashes)
+			state_final(arg, flags);
 	}
 }

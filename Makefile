@@ -6,7 +6,7 @@
 #    By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/03 19:54:48 by ljoly             #+#    #+#              #
-#    Updated: 2018/09/27 19:20:46 by ljoly            ###   ########.fr        #
+#    Updated: 2018/09/28 20:56:44 by ljoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,7 @@ NAME = ft_ssl
 
 SRC_SSL = main.c md5.c tables.c error.c get_format.c build_meta.c \
 
-SRC_PARSING = parser.c state_a.c lex_hashname.c lex_flags_pqr.c lex_file.c \
-			lex_blank.c \
+SRC_PARSING = parser.c lexer.c state_a.c state_b.c state_c.c\
 
 SSL_PATH = ./src/
 PARSING_PATH = ./src/parsing/

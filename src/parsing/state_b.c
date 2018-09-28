@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_file.c                                         :+:      :+:    :+:   */
+/*   state_b.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/27 19:04:32 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/27 19:06:52 by ljoly            ###   ########.fr       */
+/*   Created: 2018/09/28 19:10:18 by ljoly             #+#    #+#             */
+/*   Updated: 2018/09/28 20:02:49 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-t_bool          lex_file(char *str, t_arg *arg)
+/*
+** a file or nothing
+*/
+void        *state_b(char *arg, t_flags *flags)
 {
-    return (FALSE);
+    if (lex_file(arg, flags))
+    {
+        return (&state_b);
+    }
+    return (NULL);
 }

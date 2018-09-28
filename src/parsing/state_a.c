@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 21:09:34 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/27 19:19:51 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/09/28 21:21:33 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,24 @@
 /*
 ** anything but a string
 */
-void        *state_a(char *str, t_arg *arg)
+void        *state_a(char *arg, t_flags *flags)
 {
-    if (lex_blank(str, arg))
+    if (lex_blank(arg))
     {
         return (NULL);
     }
-    else if (lex_flags_pqr(str, arg))
+    else if (lex_flags_pqr(arg, flags))
     {
         return (&(state_a));
     }
-    else if (lex_flag_s(str, arg))
+    else if (lex_flag_s(arg))
     {
-        // return (&(state_d));
+        flags->s = TRUE;
+        return (&(state_c));
     }
-    else if (lex_file(str, arg))
-    {
-        // return (&state_b)); // meme chose que state_a sans les flags
-    }
+    // else if (lex_file(arg, flags))
+    // {
+    //     // return (&state_b)); // meme chose que state_a sans les flags
+    // }
     return (NULL);
 }
