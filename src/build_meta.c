@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 14:50:41 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/01 17:35:27 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/01 17:54:58 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void     add_padding(t_env *e, size_t len_buff, size_t index_meta)
         index_meta++;
     }
     e->meta_block[index_meta] = e->meta_block[index_meta] | pad;
-    ft_printf("%.8x indexmeta = %zu\n", e->meta_block[index_meta], index_meta);
 }
 
 void            build_meta(t_env *e)
@@ -55,6 +54,7 @@ void            build_meta(t_env *e)
         err_sys(MALLOC);
     i = 0;
     k = 0;
+    buff[0] = '\0';
     while (i < e->input_len)
     {
         j = 0;
