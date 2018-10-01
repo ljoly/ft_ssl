@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 20:43:00 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/28 21:21:05 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/01 17:26:26 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct  s_flags
 }				t_flags;
 
 void	        handle_args(int action, char *arg, t_flags *flags);
+void            get_stdin(t_flags *flags);
 void            *state_a(char *arg, t_flags *flags);
 void            *state_b(char *arg, t_flags *flags);
 void            *state_c(char *arg, t_flags *flags);
@@ -45,6 +46,5 @@ t_bool          lex_hashname(char *arg, t_flags *flags);
 t_bool          lex_flags_pqr(char *arg, t_flags *flags);
 t_bool          lex_flag_s(char *arg);
 t_bool          lex_file(char *arg, t_flags *flags);
-t_bool          lex_blank(char *arg);
 
 #endif

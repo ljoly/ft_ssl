@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 14:52:05 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/24 20:07:53 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/01 17:25:11 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void     get_format(t_env *e)
 {
-    e->input_bitsize += 64;
+    if (e->input_bitsize)
+        e->input_bitsize += 64;
     e->blocks = 1 + e->input_bitsize / 512;
     ft_printf("blocks = %d\n", e->blocks);
     e->padding_bitsize = e->blocks * 512 - e->input_bitsize % 512;

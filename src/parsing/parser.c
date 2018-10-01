@@ -6,20 +6,18 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 20:01:27 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/28 21:02:09 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/01 17:40:40 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static void			*state_final(char *arg, t_flags *flags)
+static void			*state_final(t_flags *flags)
 {
 	if (flags->s)
 		err_usage(NO_STRING, flags);
 	else
-		// read STDIN
-	(void)arg;
-	(void)flags;
+		get_stdin(flags);
 	return (NULL);
 }
 
@@ -54,6 +52,8 @@ void	    		handle_args(int action, char *arg, t_flags *flags)
 	else if (action == END)
 	{
 		if (!flags->hashes)
-			state_final(arg, flags);
+		{
+			state_final(flags);
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 19:05:48 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/28 21:21:21 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/01 17:26:22 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ t_bool      lex_flags_pqr(char *arg, t_flags *flags)
     {
         if (flags->p)
         {
-            //print ""
+            // flags->input = "";
         }
         else
         {
             flags->p = TRUE;
-            //print STDIN
+            get_stdin(flags);
         }
     }
     else if (ft_strequ("-q", arg))
@@ -44,11 +44,6 @@ t_bool      lex_flags_pqr(char *arg, t_flags *flags)
             flags->r = TRUE;
     }
     return (TRUE);
-}
-
-t_bool      lex_blank(char *arg)
-{
-    return (arg == NULL);
 }
 
 t_bool       lex_file(char *arg, t_flags *flags)

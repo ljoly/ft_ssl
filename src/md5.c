@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 19:13:19 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/28 21:04:18 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/01 17:08:33 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ void ft_md5(char *input)
     e.input = input;
     e.input_len = ft_strlen(input);
     e.input_bitsize = e.input_len * 8;
-    ft_printf("input len = %zu\n", ft_strlen(input));
-    ft_printf("input bitsize = %d\n", e.input_bitsize);
+    // ft_printf("input len = %zu\n", ft_strlen(input));
+    // ft_printf("input bitsize = %d\n", e.input_bitsize);
     get_format(&e);
     build_meta(&e);
     // print(e);

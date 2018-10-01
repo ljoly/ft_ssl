@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   state_c.c                                          :+:      :+:    :+:   */
+/*   get_stdin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/28 20:35:29 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/01 17:48:58 by ljoly            ###   ########.fr       */
+/*   Created: 2018/10/01 14:06:13 by ljoly             #+#    #+#             */
+/*   Updated: 2018/10/01 17:21:04 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-/*
-** a string
-*/
-void            *state_c(char *arg, t_flags *flags)
+void        get_stdin(t_flags *flags)
 {
-    flags->input = arg;
-    flags->s = FALSE;
-    return (&(state_a));
+	int     ret;
+    char    buf[2];
+
+    if (!(flags->input = (char*)ft_memalloc(sizeof(char) * 2)))
+        err_sys(MALLOC);
+	while ((ret = read(0, buf, 1)))
+	{
+		if (ret == -1)
+			break;
+        buf[1] = '\0';
+        flags->input = ft_strjoin_and_free(flags->input, buf, '\0', 1);	
+    }
 }

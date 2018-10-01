@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 21:09:34 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/28 21:21:33 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/01 17:48:46 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,7 @@
 */
 void        *state_a(char *arg, t_flags *flags)
 {
-    if (lex_blank(arg))
-    {
-        return (NULL);
-    }
-    else if (lex_flags_pqr(arg, flags))
+    if (lex_flags_pqr(arg, flags))
     {
         return (&(state_a));
     }
