@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:03:23 by ljoly             #+#    #+#             */
-/*   Updated: 2018/09/26 20:45:02 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/02 16:55:47 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include "libft.h"
 # include "parser.h"
 # include "error.h"
-
-# define MD5_PRINT_LEN 32
-# define SHA2_PRINT_LEN 64
 
 # define INIT_A 0x67452301
 # define INIT_B 0xEFCDAB89
@@ -39,9 +36,10 @@ typedef struct  s_env
     uint32_t    input_bitsize;
     size_t      blocks;
     uint32_t    *meta_block;
+    char        *output;
 }				t_env;
 
-typedef struct  s_md5
+typedef struct  s_algo
 {
     uint32_t         a;
     uint32_t         a0;
@@ -53,9 +51,10 @@ typedef struct  s_md5
     uint32_t         d0;
     uint32_t         f;
     uint32_t         g;
-}               t_md5;
+}               t_algo;
 
-void		    ft_md5(char *s);
+void            handle_input(char *arg, t_flags *flags);
+t_algo		    ft_md5(char *input);
 void            get_format(t_env *e);
 void            build_meta(t_env *e);
 

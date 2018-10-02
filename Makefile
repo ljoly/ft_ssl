@@ -6,15 +6,16 @@
 #    By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/03 19:54:48 by ljoly             #+#    #+#              #
-#    Updated: 2018/10/01 17:26:33 by ljoly            ###   ########.fr        #
+#    Updated: 2018/10/02 19:44:42 by ljoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ssl
 
 SRC_SSL = main.c md5.c tables.c error.c get_format.c build_meta.c \
+		handle_input.c \
 
-SRC_PARSING = parser.c lexer.c get_stdin.c state_a.c state_b.c state_c.c\
+SRC_PARSING = parser.c lexer.c read_fd.c state_a.c state_b.c state_c.c\
 
 SSL_PATH = ./src/
 PARSING_PATH = ./src/parsing/

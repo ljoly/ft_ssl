@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 19:13:19 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/01 17:08:33 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/02 16:32:12 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static uint32_t left_rotate(uint32_t x, uint32_t c)
     return ((x << c) | (x >> (32-c)));
 }
 
-void static initialize(t_md5 *m)
+void static initialize(t_algo *m)
 {
     m->a0 = INIT_A;
     m->b0 = INIT_B;
@@ -31,11 +31,11 @@ void static initialize(t_md5 *m)
     m->d0 = INIT_D;
 }
 
-void static hash_meta(uint32_t *meta, size_t blocks)
+static t_algo   hash_meta(uint32_t *meta, size_t blocks)
 {
-    t_md5 m;
-    uint32_t i;
-    uint32_t j;
+    t_algo      m;
+    uint32_t    i;
+    uint32_t    j;
 
     initialize(&m);
     j = 0;
@@ -85,24 +85,14 @@ void static hash_meta(uint32_t *meta, size_t blocks)
     m.b0 = reverse_bits(m.b0);
     m.c0 = reverse_bits(m.c0);
     m.d0 = reverse_bits(m.d0);
-    printf("%.8x%.8x%.8x%.8x\n", m.a0, m.b0, m.c0, m.d0);
+    // printf("%.8x%.8x%.8x%.8x\n", m.a0, m.b0, m.c0, m.d0);
+    return (m);
 }
 
-// void static print(t_env e)
-// {
-//     size_t i;
-
-//     i = 0;
-//     while (i < e.blocks * 16)
-//     {
-//         printf("%u\n", e.meta_block[i]);
-//         i++;
-//     }
-// }
-
-void ft_md5(char *input)
+t_algo      ft_md5(char *input)
 {
-    t_env e;
+    t_env   e;
+    t_algo  m;
 
     e.input = input;
     e.input_len = ft_strlen(input);
@@ -111,6 +101,6 @@ void ft_md5(char *input)
     // ft_printf("input bitsize = %d\n", e.input_bitsize);
     get_format(&e);
     build_meta(&e);
-    // print(e);
-    hash_meta(e.meta_block, e.blocks);
+    m = hash_meta(e.meta_block, e.blocks);
+    return (m);
 }

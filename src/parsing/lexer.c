@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 19:05:48 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/01 17:26:22 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/02 20:30:42 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ t_bool      lex_flags_pqr(char *arg, t_flags *flags)
         return (FALSE);
     if (ft_strequ("-p", arg))
     {
-        if (flags->p)
+        if (flags->stdin_open)
         {
-            // flags->input = "";
+            flags->input = ft_strdup("");
         }
         else
         {
+            flags->stdin_open = TRUE;
             flags->p = TRUE;
-            get_stdin(flags);
+            read_fd(flags, 1);
         }
     }
     else if (ft_strequ("-q", arg))
@@ -46,11 +47,17 @@ t_bool      lex_flags_pqr(char *arg, t_flags *flags)
     return (TRUE);
 }
 
-t_bool       lex_file(char *arg, t_flags *flags)
+t_bool      lex_file(char *arg, t_flags *flags)
 {
-    (void)arg;
-    (void)flags;
-    return (FALSE);
+    int     fd;
+
+    flags->input = ft_strdup(arg);
+    if ((fd = open(arg, O_RDONLY)) == -1)
+        err_usage(NOT_A_FILE, flags);
+    flags->file_open = TRUE;
+    free(flags->input);
+    read_fd(flags, fd);
+    return (TRUE);
 }
 
 t_bool      lex_hashname(char *arg, t_flags *flags)
@@ -58,7 +65,9 @@ t_bool      lex_hashname(char *arg, t_flags *flags)
     if (ft_strequ("md5", arg) || ft_strequ("sha256", arg))
     {
         if (ft_strequ("md5", arg))
-            flags->md5 = TRUE;
+            flags->algo = MD5;
+        else if (ft_strequ("sha256", arg))
+            flags->algo = SHA256;
         return (TRUE);
     }
     return (FALSE);

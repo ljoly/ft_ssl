@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 21:09:34 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/01 17:48:46 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/02 20:28:51 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 */
 void        *state_a(char *arg, t_flags *flags)
 {
+    flags->s = FALSE;
+    flags->p = FALSE;
     if (lex_flags_pqr(arg, flags))
     {
         return (&(state_a));
@@ -26,9 +28,9 @@ void        *state_a(char *arg, t_flags *flags)
         flags->s = TRUE;
         return (&(state_c));
     }
-    // else if (lex_file(arg, flags))
-    // {
-    //     // return (&state_b)); // meme chose que state_a sans les flags
-    // }
+    else if (lex_file(arg, flags))
+    {
+        return (&state_b);
+    }
     return (NULL);
 }
