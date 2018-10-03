@@ -1,38 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.c                                              :+:      :+:    :+:   */
+/*   sha256.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/04 19:13:19 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/03 19:34:48 by ljoly            ###   ########.fr       */
+/*   Created: 2018/10/03 19:33:26 by ljoly             #+#    #+#             */
+/*   Updated: 2018/10/03 20:06:17 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static uint32_t reverse_bits(uint32_t value)
-{
-    return (value & 0x000000FFU) << 24 | (value & 0x0000FF00U) << 8 |
-        (value & 0x00FF0000U) >> 8 | (value & 0xFF000000U) >> 24;
-}
+// static uint32_t reverse_bits(uint32_t value)
+// {
+//     return (value & 0x000000FFU) << 24 | (value & 0x0000FF00U) << 8 |
+//         (value & 0x00FF0000U) >> 8 | (value & 0xFF000000U) >> 24;
+// }
 
-static uint32_t left_rotate(uint32_t x, uint32_t c)
+static uint32_t		right_rotate(uint32_t x, uint32_t c)
 {
-    return ((x << c) | (x >> (32-c)));
+    return ((x >> c) | (x << (32-c)));
 }
 
 void static initialize(t_algo *m)
 {
-    m->a0 = 0x67452301;
-    m->b0 = 0xEFCDAB89;
-    m->c0 = 0x98BADCFE;
-    m->d0 = 0x10325476;
+	m->a0 = 0x6a09e667;
+	m->b0 = 0xbb67ae85;
+	m->c0 = 0x3c6ef372;
+	m->d0 = 0xa54ff53a;
+	m->e0 = 0x510e527f;
+	m->f0 = 0x9b05688c;
+	m->g0 = 0x1f83d9ab;
+	m->h0 = 0x5be0cd19;
 }
 
 static t_algo   hash_meta(uint32_t *meta, size_t blocks)
 {
+	uint32_t	block[64];
     t_algo      m;
     uint32_t    i;
     uint32_t    j;
@@ -41,10 +46,16 @@ static t_algo   hash_meta(uint32_t *meta, size_t blocks)
     j = 0;
     while (j < blocks)
     {
+		// copy the first 16 indexes of meta into block[64];
+
         m.a = m.a0;
         m.b = m.b0;
         m.c = m.c0;
         m.d = m.d0;
+		m.e = m.e0;
+		m.f = m.f0;
+		m.g = m.g0;
+		m.h = m.h0;
         i = 0;
         while (i < 64)
         {
@@ -88,7 +99,7 @@ static t_algo   hash_meta(uint32_t *meta, size_t blocks)
     return (m);
 }
 
-t_algo      ft_md5(char *input)
+t_algo      ft_sha256(char *input)
 {
     t_env   e;
     t_algo  m;

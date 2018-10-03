@@ -6,13 +6,13 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 16:54:24 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/03 19:26:41 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/03 19:47:07 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static void		print_md5(t_algo a, t_flags *flags, char *arg)
+static void		print(t_algo a, t_flags *flags, char *arg, char *algo)
 {
 	if (flags->q || flags->p || (!flags->s && !flags->p && !flags->file_open))
 	{
@@ -40,12 +40,12 @@ void		handle_input(char *arg, t_flags *flags)
 	if (flags->algo == MD5)
 	{
 		a = ft_md5(flags->input);
-		print_md5(a, flags, arg);
+		print(a, flags, arg, "MD5");
 	}
 	else if (flags->algo == SHA256)
 	{
-		// a = ft_sha256(flags->input);
-		ft_putendl("HANDLE SHA256");
+		a = ft_sha256(flags->input);
+		print(a, flags, arg, "SHA256");
 	}
 	flags->hashes++;
 }
