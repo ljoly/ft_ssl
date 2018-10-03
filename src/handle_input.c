@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 16:54:24 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/03 19:07:54 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/03 19:26:41 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static void		print_md5(t_algo a, t_flags *flags, char *arg)
 {
 	if (flags->q || flags->p || (!flags->s && !flags->p && !flags->file_open))
 	{
-		ft_putendl("PQR");
-		ft_printf("FLAG q: %d\n", flags->q);
     	ft_printf("%.8x%.8x%.8x%.8x\n", a.a0, a.b0, a.c0, a.d0);		
 	}
 	else if (flags->r)

@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 21:09:34 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/03 19:06:23 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/03 19:26:53 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 void		*state_a(char *arg, t_flags *flags)
 {
-	ft_putendl("STATE_A");
 	flags->s = FALSE;
 	flags->p = FALSE;
 	if (lex_flags_pqr(arg, flags))
