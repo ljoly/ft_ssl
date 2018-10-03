@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 17:44:56 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/02 21:12:07 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/03 18:40:07 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ int				main(int argc, char **argv)
 	int			i;
 	t_flags		flags;
 
-	if (argc > 1)
-		handle_args(START, argv[1], &flags);
-	else
+	(argc > 1) ? handle_args(START, argv[1], &flags) :
 		err_usage(NOT_A_HASH, &flags);
 	i = 1;
 	init_flags(&flags);
@@ -41,30 +39,17 @@ int				main(int argc, char **argv)
 	{
 		handle_args(USE, argv[i], &flags);
 		if (flags.input && !flags.error)
-		{
 			handle_input(argv[i], &flags);
-		}
 		if (flags.input)
 		{
 			free(flags.input);
 			flags.input = NULL;
 		}
+		flags.error = FALSE;
 		i++;
 	}
-	if (flags.input)
-		ft_putendl("HHAHAHHAA");
 	handle_args(END, NULL, &flags);
-	if (flags.input)
-		ft_putendl("BABABABABA");
 	if (flags.input && !flags.error)
-	{
-		ft_putendl("LOLOLOLOL");
-		ft_printf("INPUT = %s\n", flags.input);
 		handle_input(argv[i], &flags);
-	}
-	if (flags.error_seen)
-	{
-		return (1);
-	}
- 	return (0);
+	return (flags.error_seen);
 }

@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 19:13:19 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/02 16:32:12 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/03 18:56:49 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ static t_algo   hash_meta(uint32_t *meta, size_t blocks)
                 m.f = (m.c ^ (m.b | ~m.d));
                 m.g = (7 * i) % 16;
             }
-            m.f += m.a + g_T[i] + meta[m.g + j * 16];
+            m.f += m.a + g_sine[i] + meta[m.g + j * 16];
             m.a = m.d;
             m.d = m.c;
             m.c = m.b;
-            m.b += left_rotate(m.f, g_s[i]);
+            m.b += left_rotate(m.f, g_shift[i]);
             i++;
         }
         m.a0 += m.a;
@@ -85,7 +85,6 @@ static t_algo   hash_meta(uint32_t *meta, size_t blocks)
     m.b0 = reverse_bits(m.b0);
     m.c0 = reverse_bits(m.c0);
     m.d0 = reverse_bits(m.d0);
-    // printf("%.8x%.8x%.8x%.8x\n", m.a0, m.b0, m.c0, m.d0);
     return (m);
 }
 
@@ -97,8 +96,6 @@ t_algo      ft_md5(char *input)
     e.input = input;
     e.input_len = ft_strlen(input);
     e.input_bitsize = e.input_len * 8;
-    // ft_printf("input len = %zu\n", ft_strlen(input));
-    // ft_printf("input bitsize = %d\n", e.input_bitsize);
     get_format(&e);
     build_meta(&e);
     m = hash_meta(e.meta_block, e.blocks);

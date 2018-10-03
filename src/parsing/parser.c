@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 20:01:27 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/02 20:53:30 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/03 18:40:28 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 static void			*state_final(t_flags *flags)
 {
 	if (flags->s)
+	{
 		err_usage(NO_STRING, flags);
-	else
+	}
+	else if (!flags->hashes && !flags->error_seen)
+	{
 		read_fd(flags, 1);
+	}
 	return (NULL);
 }
 
@@ -37,11 +41,11 @@ static void			*state_initial(char *arg, t_flags *flags)
 /*
 ** Parsing the arguments using a state-machine
 */
-void	    		handle_args(int action, char *arg, t_flags *flags)
+
+void				handle_args(int action, char *arg, t_flags *flags)
 {
 	static void		*(*state)(char *arg, t_flags *flags);
 
-	flags->error = FALSE;
 	if (action == START)
 	{
 		state = &(state_initial);
@@ -52,9 +56,6 @@ void	    		handle_args(int action, char *arg, t_flags *flags)
 	}
 	else if (action == END)
 	{
-		if (!flags->hashes && !flags->error_seen)
-		{
-			state_final(flags);
-		}
+		state_final(flags);
 	}
 }
