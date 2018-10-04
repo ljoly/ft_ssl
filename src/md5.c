@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 19:13:19 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/03 19:34:48 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/04 18:58:18 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,14 @@ static t_algo   hash_meta(uint32_t *meta, size_t blocks)
     return (m);
 }
 
-t_algo      ft_md5(char *input)
+t_algo      ft_md5(char *input, size_t size)
 {
     t_env   e;
     t_algo  m;
 
     e.input = input;
-    e.input_len = ft_strlen(input);
+	e.input_len = size;
+	ft_printf("INPUT_LEN FT_MD5 = %zu\n", e.input_len);
     e.input_bitsize = e.input_len * 8;
     get_format(&e);
     build_meta(&e);

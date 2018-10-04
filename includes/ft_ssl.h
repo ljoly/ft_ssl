@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:03:23 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/03 19:41:32 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/04 18:55:06 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct	s_algo
 }				t_algo;
 
 void			handle_input(char *arg, t_flags *flags);
-t_algo			ft_md5(char *input);
+t_algo			ft_md5(char *input, size_t size);
 t_algo			ft_sha256(char *input);
 void			get_format(t_env *e);
 void			build_meta(t_env *e);

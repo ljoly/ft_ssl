@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 19:05:48 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/03 18:39:09 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/04 18:43:08 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_bool		lex_file(char *arg, t_flags *flags)
 		err_usage(NOT_A_FILE, flags);
 		return (FALSE);
 	}
-	free(flags->input);
+	// free(flags->input);
 	read_fd(flags, fd);
 	return (TRUE);
 }

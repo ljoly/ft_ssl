@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 14:50:41 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/01 17:54:58 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/04 19:04:21 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,18 @@ void            build_meta(t_env *e)
         err_sys(MALLOC);
     i = 0;
     k = 0;
-    buff[0] = '\0';
+    // buff[0] = '\0';
+	ft_printf("INPUT LEN BUILD META = %d\n", e->input_len);
     while (i < e->input_len)
     {
         j = 0;
-        while (i < e->input_len && j < 4)
+        while (i < e->input_len && j < 4)                     // faire avec size % 4 pour avoir la derniere size du buffer
         {
             buff[j] = e->input[i];
             j++;
             i++;
         }
-        buff[j] = '\0';
+        // buff[j] = '\0';
         ft_memcpy(&e->meta_block[k], buff, ft_strlen(buff));
         k++;
     }

@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 16:54:24 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/03 19:47:07 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/04 18:55:43 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static void		print(t_algo a, t_flags *flags, char *arg, char *algo)
 	}
 	else if (flags->s && !flags->q && !flags->r)
 	{
-    	ft_printf("MD5 (\"%s\") = %.8x%.8x%.8x%.8x\n", arg, a.a0, a.b0, a.c0, a.d0);
+    	ft_printf("%s (\"%s\") = %.8x%.8x%.8x%.8x\n", algo, arg, a.a0, a.b0, a.c0, a.d0);
 	}
     else
-        ft_printf("MD5 (%s) = %.8x%.8x%.8x%.8x\n", arg, a.a0, a.b0, a.c0, a.d0);
+        ft_printf("%s (%s) = %.8x%.8x%.8x%.8x\n", algo, arg, a.a0, a.b0, a.c0, a.d0);
 }
 
 void		handle_input(char *arg, t_flags *flags)
@@ -39,7 +39,7 @@ void		handle_input(char *arg, t_flags *flags)
 
 	if (flags->algo == MD5)
 	{
-		a = ft_md5(flags->input);
+		a = ft_md5(flags->input, flags->size);
 		print(a, flags, arg, "MD5");
 	}
 	else if (flags->algo == SHA256)

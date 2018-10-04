@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 20:43:00 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/02 20:39:43 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/04 18:54:00 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSER_H
 
 # include "libft.h"
+# include "sys/stat.h"
 
 typedef enum    e_run
 {
@@ -43,6 +44,7 @@ typedef struct  s_flags
     t_bool      error_seen;
     t_bool      error;
     char        *input; // copy the string/file/arg here
+	size_t		size;
     int         hashes;
 }				t_flags;
 

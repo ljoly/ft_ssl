@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 17:44:56 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/03 18:40:07 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/04 18:54:35 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void		init_flags(t_flags *flags)
 	flags->error = FALSE;
 	flags->error_seen = FALSE;
 	flags->input = NULL;
+	flags->size = 0;
 	flags->hashes = 0;
 }
 
