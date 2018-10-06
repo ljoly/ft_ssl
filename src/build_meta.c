@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 14:50:41 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/04 19:04:21 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/06 19:27:32 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,52 +25,34 @@ static void     add_size(t_env *e)
     e->meta_block[index] = size & 0xffffffff;
 }
 
-static void     add_padding(t_env *e, size_t len_buff, size_t index_meta)
+static void     add_padding(t_env *e/*, size_t len_buff, size_t index_meta*/)
 {
     uint32_t    pad;
+    size_t      last_bytes;
+    size_t      index;
 
+    last_bytes = e->input_len % 4;
+    index = e->input_len / 4;
     pad = 0x00000080;
-    if (len_buff == 1)
+    if (last_bytes == 1)
         pad = 0x00008000;
-    else if (len_buff == 2)
+    else if (last_bytes == 2)
         pad = 0x00800000;
-    else if (len_buff == 3)
+    else if (last_bytes == 3)
         pad = 0x80000000;
-    else if (len_buff == 4)
+    else if (last_bytes == 4)
     {
-        index_meta++;
+        index++;
     }
-    e->meta_block[index_meta] = e->meta_block[index_meta] | pad;
+    e->meta_block[index] = e->meta_block[index] | pad;
 }
 
 void            build_meta(t_env *e)
 {
-    size_t      i;
-    size_t      j;
-    size_t      k;
-    char        buff[5];
-
-    if (!(e->meta_block = (uint32_t*)ft_memalloc(sizeof(uint32_t) * e->blocks * 16)))
+    if (!(e->meta_block = (uint32_t*)ft_memalloc(sizeof(uint32_t) *
+        e->blocks * 16)))
         err_sys(MALLOC);
-    i = 0;
-    k = 0;
-    // buff[0] = '\0';
-	ft_printf("INPUT LEN BUILD META = %d\n", e->input_len);
-    while (i < e->input_len)
-    {
-        j = 0;
-        while (i < e->input_len && j < 4)                     // faire avec size % 4 pour avoir la derniere size du buffer
-        {
-            buff[j] = e->input[i];
-            j++;
-            i++;
-        }
-        // buff[j] = '\0';
-        ft_memcpy(&e->meta_block[k], buff, ft_strlen(buff));
-        k++;
-    }
-    if (k)
-        k--;
-    add_padding(e, ft_strlen(buff), k);
+    ft_memcpy(e->meta_block, e->input, e->input_len);
+    add_padding(e);
     add_size(e);
 }

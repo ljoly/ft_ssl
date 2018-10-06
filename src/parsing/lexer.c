@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 19:05:48 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/04 18:43:08 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/06 19:11:01 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_bool		lex_flags_pqr(char *arg, t_flags *flags)
 		{
 			flags->stdin_open = TRUE;
 			flags->p = TRUE;
-			read_fd(flags, 0);
+			read_fd(flags, STDIN);
 		}
 	}
 	else if (ft_strequ("-q", arg))

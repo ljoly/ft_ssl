@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 20:01:27 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/03 18:40:28 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/06 19:13:48 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void			*state_final(t_flags *flags)
 	}
 	else if (!flags->hashes && !flags->error_seen)
 	{
-		read_fd(flags, 1);
+		if (!flags->error_seen)
+		read_fd(flags, STDIN);
 	}
 	return (NULL);
 }

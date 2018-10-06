@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 16:14:13 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/02 18:10:56 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/06 17:52:50 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,17 @@
 # define WHITE "\033[0;37m"
 # define NC "\033[0m"
 
-typedef char			t_bool;
+# define STDIN 	0
+# define STDOUT 1
+# define STDERR 2
 
-# define TRUE           1
-# define FALSE          0
+typedef char	t_bool;
 
-# define HEX 			"0123456789abcdef"
-# define HEX_UP 		"0123456789ABCDEF"
+# define TRUE   1
+# define FALSE  0
+
+# define HEX 	"0123456789abcdef"
+# define HEX_UP "0123456789ABCDEF"
 
 typedef struct	s_list
 {

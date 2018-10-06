@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 16:54:24 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/04 18:55:43 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/06 18:43:51 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		print(t_algo a, t_flags *flags, char *arg, char *algo)
 {
-	if (flags->q || flags->p || (!flags->s && !flags->p && !flags->file_open))
+	if (flags->q || flags->p || (!flags->q && !flags->p && !flags->s && !flags->file_open))
 	{
     	ft_printf("%.8x%.8x%.8x%.8x\n", a.a0, a.b0, a.c0, a.d0);		
 	}
@@ -25,12 +25,13 @@ static void		print(t_algo a, t_flags *flags, char *arg, char *algo)
 		else
     		ft_printf("%.8x%.8x%.8x%.8x %s\n", a.a0, a.b0, a.c0, a.d0, arg);				
 	}
-	else if (flags->s && !flags->q && !flags->r)
+	else if (flags->s)
 	{
     	ft_printf("%s (\"%s\") = %.8x%.8x%.8x%.8x\n", algo, arg, a.a0, a.b0, a.c0, a.d0);
 	}
     else
         ft_printf("%s (%s) = %.8x%.8x%.8x%.8x\n", algo, arg, a.a0, a.b0, a.c0, a.d0);
+	flags->s = FALSE;
 }
 
 void		handle_input(char *arg, t_flags *flags)

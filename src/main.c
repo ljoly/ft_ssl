@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 17:44:56 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/04 18:54:35 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/06 19:13:18 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ int				main(int argc, char **argv)
 	int			i;
 	t_flags		flags;
 
+	init_flags(&flags);
 	(argc > 1) ? handle_args(START, argv[1], &flags) :
 		err_usage(NOT_A_HASH, &flags);
 	i = 1;
-	init_flags(&flags);
 	while (i < argc)
 	{
 		handle_args(USE, argv[i], &flags);
-		if (flags.input && !flags.error)
-			handle_input(argv[i], &flags);
 		if (flags.input)
 		{
+			if (!flags.error)
+				handle_input(argv[i], &flags);
 			free(flags.input);
 			flags.input = NULL;
 		}
