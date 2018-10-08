@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:03:23 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/04 18:55:06 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/08 18:42:27 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 /*
 ** tables used to build the message digest
 */
-uint32_t		g_sine[64];
-uint32_t		g_shift[64];
+const uint32_t	g_sine[64];
+const uint32_t	g_shift[64];
+const uint32_t	g_cube[64];
 
 typedef struct	s_env
 {
@@ -52,12 +53,23 @@ typedef struct	s_algo
 	uint32_t	g0;
 	uint32_t	h;
 	uint32_t	h0;
+	uint32_t	s0;
+	uint32_t	s1;
+	uint32_t	t0;
+	uint32_t	t1;
+	uint32_t	ch;
+	uint32_t	temp1;
+	uint32_t	temp2;
+	uint32_t	maj;
 }				t_algo;
 
-void			handle_input(char *arg, t_flags *flags);
-t_algo			ft_md5(char *input, size_t size);
-t_algo			ft_sha256(char *input);
+void			handle_hash(char *input, t_flags *flags);
 void			get_format(t_env *e);
 void			build_meta(t_env *e);
+t_algo			hash_md5(uint32_t *meta, size_t blocks);
+t_algo			hash_256(uint32_t *meta, size_t blocks);
+
+void			print_md5(t_algo a, t_flags *flags, char *arg, char *algo);
+void			print_sha256(t_algo a, t_flags *flags, char *arg, char *algo);
 
 #endif
