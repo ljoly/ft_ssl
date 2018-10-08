@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 19:05:48 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/06 19:11:01 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/08 11:23:01 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ t_bool		lex_flags_pqr(char *arg, t_flags *flags)
 	if (ft_strequ("-p", arg))
 	{
 		if (flags->stdin_open)
+		{
+			flags->size = 0;
 			flags->input = ft_strdup("");
+		}
 		else
 		{
 			flags->stdin_open = TRUE;
