@@ -6,22 +6,11 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 19:13:19 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/06 18:21:13 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/10 12:24:29 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
-
-static uint32_t reverse_bits(uint32_t value)
-{
-    return (value & 0x000000FFU) << 24 | (value & 0x0000FF00U) << 8 |
-        (value & 0x00FF0000U) >> 8 | (value & 0xFF000000U) >> 24;
-}
-
-static uint32_t left_rotate(uint32_t x, uint32_t c)
-{
-    return ((x << c) | (x >> (32-c)));
-}
 
 void static initialize(t_algo *m)
 {
@@ -31,12 +20,18 @@ void static initialize(t_algo *m)
     m->d0 = 0x10325476;
 }
 
-static t_algo   hash_meta(uint32_t *meta, size_t blocks)
+t_algo			hash_md5(uint32_t *meta, size_t blocks)
 {
     t_algo      m;
     uint32_t    i;
     uint32_t    j;
 
+	// i = 0;
+	// while (i < 16)
+	// {
+	// 	printf("%d: %x\n", i, meta[i]);
+	// 	i++;
+	// }
     initialize(&m);
     j = 0;
     while (j < blocks)
@@ -81,24 +76,9 @@ static t_algo   hash_meta(uint32_t *meta, size_t blocks)
         m.d0 += m.d;
         j++;
     }
-    m.a0 = reverse_bits(m.a0);
-    m.b0 = reverse_bits(m.b0);
-    m.c0 = reverse_bits(m.c0);
-    m.d0 = reverse_bits(m.d0);
-    return (m);
-}
-
-t_algo      ft_md5(char *input, size_t size)
-{
-    t_env   e;
-    t_algo  m;
-
-    e.input = input;
-	e.input_len = size;
-	// ft_printf("INPUT = %s\nINPUT_LEN FT_MD5 = %zu\n", e.input, e.input_len);
-    e.input_bitsize = e.input_len * 8;
-    get_format(&e);
-    build_meta(&e);
-    m = hash_meta(e.meta_block, e.blocks);
+    m.a0 = swap_bytes_32bit(m.a0);
+    m.b0 = swap_bytes_32bit(m.b0);
+    m.c0 = swap_bytes_32bit(m.c0);
+    m.d0 = swap_bytes_32bit(m.d0);
     return (m);
 }

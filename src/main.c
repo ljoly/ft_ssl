@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 17:44:56 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/06 19:13:18 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/10 20:47:19 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ static void		init_flags(t_flags *flags)
 	flags->hashes = 0;
 }
 
+static void		handle_input(char *arg, t_flags *flags)
+{
+	handle_hash(arg, flags);
+	free(flags->input);
+	flags->input = NULL;
+}
+
 int				main(int argc, char **argv)
 {
 	int			i;
@@ -39,18 +46,13 @@ int				main(int argc, char **argv)
 	while (i < argc)
 	{
 		handle_args(USE, argv[i], &flags);
-		if (flags.input)
-		{
-			if (!flags.error)
-				handle_input(argv[i], &flags);
-			free(flags.input);
-			flags.input = NULL;
-		}
+		if (flags.input && !flags.error)
+			handle_input(argv[i], &flags);
 		flags.error = FALSE;
 		i++;
 	}
 	handle_args(END, NULL, &flags);
-	if (flags.input && !flags.error)
+	if (flags.input)
 		handle_input(argv[i], &flags);
 	return (flags.error_seen);
 }

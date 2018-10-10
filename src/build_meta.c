@@ -6,25 +6,34 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 14:50:41 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/08 12:29:51 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/10 17:50:42 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static void		add_size(t_env *e)
+static void		add_size(t_env *e, t_flags *flags)
 {
 	size_t		size;
 	size_t		index;
 
+	(void)flags;
 	size = 0;
 	if (e->input_bitsize)
 	{
 		size = e->input_bitsize - 64;
 	}
 	index = e->blocks * 16 - 2;
-	e->meta_block[index + 1] = (size >> 32) & 0xffffffff;
-	e->meta_block[index] = size & 0xffffffff;
+	if (flags->algo == MD5)
+	{
+		e->meta_block[index + 1] = (size >> 32) & 0xffffffff;
+		e->meta_block[index] = size & 0xffffffff;
+	}
+	else
+	{
+		e->meta_block[index] = (size >> 32) & 0xffffffff;
+		e->meta_block[index + 1] = size & 0xffffffff;
+	}
 }
 
 static void		add_padding(t_env *e)
@@ -49,7 +58,7 @@ static void		add_padding(t_env *e)
 	e->meta_block[index] = e->meta_block[index] | pad;
 }
 
-void			build_meta(t_env *e)
+void			build_meta(t_env *e, t_flags *flags)
 {
 	if (!(e->meta_block = (uint32_t*)ft_memalloc(sizeof(uint32_t) *
 		e->blocks * 16)))
@@ -58,5 +67,5 @@ void			build_meta(t_env *e)
 	}
 	ft_memcpy(e->meta_block, e->input, e->input_len);
 	add_padding(e);
-	add_size(e);
+	add_size(e, flags);
 }

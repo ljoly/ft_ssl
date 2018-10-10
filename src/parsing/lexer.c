@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 19:05:48 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/08 11:23:01 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/10 19:46:17 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ t_bool		lex_flags_pqr(char *arg, t_flags *flags)
 		flags->q = TRUE;
 	}
 	else if (ft_strequ("-r", arg))
-	{
 		if (!flags->q)
 			flags->r = TRUE;
-	}
 	return (TRUE);
 }
 
@@ -59,7 +57,7 @@ t_bool		lex_file(char *arg, t_flags *flags)
 		err_usage(NOT_A_FILE, flags);
 		return (FALSE);
 	}
-	// free(flags->input);
+	free(flags->input);
 	read_fd(flags, fd);
 	return (TRUE);
 }

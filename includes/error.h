@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 18:05:45 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/02 18:16:22 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/10 18:16:45 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef enum        e_usage
     NO_STRING,
     NOT_A_HASH,
     ILLEGAL_OPTION,
+	IS_DIRECTORY
 }                   t_usage;
 
 void                err_sys(t_sys err_code);

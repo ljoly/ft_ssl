@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 19:45:22 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/08 12:14:43 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/10 20:00:44 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,17 @@ void				read_fd(t_flags *flags, int fd)
 	struct stat		input;
 
 	if (fd == STDIN)
-	{
 		handle_stdin(flags);
-	}
-	else if (fd != STDOUT)
+	else
 	{
 		if (fstat(fd, &input))
 		{
 			err_sys(READ);
+		}
+		if (S_ISDIR(input.st_mode))
+		{
+			err_usage(IS_DIRECTORY, flags);
+			return ;
 		}
 		flags->size = input.st_size;
 		if (!(flags->input = (char*)ft_memalloc(sizeof(char) * flags->size)))
@@ -55,8 +58,6 @@ void				read_fd(t_flags *flags, int fd)
 		}
 		ret = read(fd, flags->input, flags->size);
 		if (ret == -1)
-		{
 			err_sys(READ);
-		}
 	}
 }

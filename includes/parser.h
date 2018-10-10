@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 20:43:00 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/04 18:54:00 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/10 19:11:36 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ typedef enum    e_name
     SHA256,
     SHA512,
 }               t_name;
+
+/*
+** Handle flags and arguments. Input will be copied into a char*
+*/
 
 typedef struct  s_flags
 {

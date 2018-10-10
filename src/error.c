@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 18:08:52 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/06 18:49:10 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/10 20:08:27 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,9 @@ void			err_usage(t_usage err_code, t_flags *flags)
 {
 	flags->error_seen = TRUE;
 	flags->error = TRUE;
-	if (err_code == NOT_A_HASH)
+	if (err_code == NOT_A_HASH || err_code == NO_STRING)
 	{
-		ft_putendl_fd("Error: wrong command", STDERR);
-		print_err(FALSE, flags);
-	}
-	else if (err_code == NO_STRING)
-	{
+		err_code == NOT_A_HASH ? ft_putendl_fd("Error: wrong command", STDERR) :
 		ft_putendl_fd("Error: option requires an argument -- s", STDERR);
 		print_err(FALSE, flags);
 	}
@@ -49,6 +45,11 @@ void			err_usage(t_usage err_code, t_flags *flags)
 	{
 		print_err(TRUE, flags);
 		ft_putendl_fd(": Illegal option", STDERR);
+	}
+	else if (err_code == IS_DIRECTORY)
+	{
+		print_err(TRUE, flags);
+		ft_putendl_fd(": Is a directory", STDERR);
 	}
 }
 
