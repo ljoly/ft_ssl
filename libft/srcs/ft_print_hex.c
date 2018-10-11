@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 16:20:16 by ljoly             #+#    #+#             */
-/*   Updated: 2018/07/10 17:20:20 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/11 12:13:27 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		ft_print_hex(size_t nb, int upper)
 {
 	char	*tab;
 
-    tab = (upper == 1) ? HEX_UP : HEX;
+	tab = (upper == 1) ? HEX_UP : HEX;
 	if (nb < 16)
 		ft_putchar(tab[nb]);
 	if (nb >= 16)
