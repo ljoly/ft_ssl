@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 14:50:41 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/10 17:50:42 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/11 13:00:40 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void		add_size(t_env *e, t_flags *flags)
 	size_t		size;
 	size_t		index;
 
-	(void)flags;
 	size = 0;
 	if (e->input_bitsize)
 	{
@@ -60,6 +59,8 @@ static void		add_padding(t_env *e)
 
 void			build_meta(t_env *e, t_flags *flags)
 {
+	size_t		i;
+
 	if (!(e->meta_block = (uint32_t*)ft_memalloc(sizeof(uint32_t) *
 		e->blocks * 16)))
 	{
@@ -67,5 +68,14 @@ void			build_meta(t_env *e, t_flags *flags)
 	}
 	ft_memcpy(e->meta_block, e->input, e->input_len);
 	add_padding(e);
+	if (!(flags->algo == MD5))
+	{
+		i = 0;
+		while (i < e->blocks * 16)
+		{
+			e->meta_block[i] = swap_bytes_32bit(e->meta_block[i]);
+			i++;
+		}
+	}
 	add_size(e, flags);
 }

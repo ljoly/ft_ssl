@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:03:23 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/10 12:25:14 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/11 13:05:45 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct	s_env
 
 typedef struct	s_algo
 {
+	uint32_t	loop;
+	uint32_t	w[64];
 	uint32_t	a;
 	uint32_t	a0;
 	uint32_t	b;
