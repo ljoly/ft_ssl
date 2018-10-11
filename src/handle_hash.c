@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 15:29:36 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/10 20:09:37 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/11 14:45:54 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ void		handle_hash(char *arg, t_flags *flags)
 	if (flags->algo == MD5)
 	{
 		a = hash_md5(e.meta_block, e.blocks);
-		print_md5(a, flags, arg, "MD5");
+		print_md5(a, flags, arg);
 	}
-	else if (flags->algo == SHA256)
+	else if (flags->algo == SHA256 || flags->algo == SHA224)
 	{
-		a = hash_256(e.meta_block, e.blocks);
-		print_sha256(a, flags, arg, "SHA256");
+		a = hash_sha2(e.meta_block, e.blocks, flags->algo);
+		flags->algo == SHA256 ? print_sha256(a, flags, arg) :
+		print_sha224(a, flags, arg);
 	}
 	free(e.meta_block);
 	flags->hashes++;

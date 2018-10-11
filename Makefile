@@ -6,14 +6,14 @@
 #    By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/03 19:54:48 by ljoly             #+#    #+#              #
-#    Updated: 2018/10/08 19:24:18 by ljoly            ###   ########.fr        #
+#    Updated: 2018/10/11 15:03:16 by ljoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ssl
 
 SRC_SSL = main.c md5.c tables.c error.c get_format.c build_meta.c \
-		handle_hash.c print.c sha256.c bitwise_op.c \
+		handle_hash.c print.c sha2.c bitwise_op.c \
 
 SRC_PARSING = parser.c lexer.c read_fd.c state_a.c state_b.c state_c.c\
 
@@ -44,7 +44,7 @@ $(NAME): obj $(OBJ)
 	@printf "\n$(GREEN)[✓]$(NC)\x1B[32mExecutable $(NAME) ready !\x1B[37m\n"
 
 obj:
-	# @make -C $(LIBFT)
+	@make -C $(LIBFT)
 	@printf "\n\x1B[38;5;208mCompiling $(NAME)...\n\x1b[37m"
 
 %.o: %.c
@@ -52,12 +52,12 @@ obj:
 	@printf "\e[38;5;208m▒\e[0m"
 
 clean:
-	# @make -C $(LIBFT) clean
+	@make -C $(LIBFT) clean
 	@rm -rf $(OBJ)
 	@printf "$(RED)[-]$(NC)Obj files deleted\n"
 
 fclean: clean
-	# @make -C $(LIBFT) fclean
+	@make -C $(LIBFT) fclean
 	@rm -f $(NAME)
 	@printf "$(RED)[-]$(NC)Executable $(NAME) deleted\n"
 

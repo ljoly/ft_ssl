@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sha256.c                                           :+:      :+:    :+:   */
+/*   sha2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/03 19:33:26 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/11 13:21:40 by ljoly            ###   ########.fr       */
+/*   Created: 2018/10/11 14:11:57 by ljoly             #+#    #+#             */
+/*   Updated: 2018/10/11 14:54:41 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static void		initialize_vars(t_algo *m, t_bool init)
+static void		initialize_vars(t_algo *m, t_name algo)
 {
-	if (init)
+	if (algo == SHA256)
 	{
 		m->a0 = 0x6a09e667;
 		m->b0 = 0xbb67ae85;
@@ -25,17 +25,29 @@ static void		initialize_vars(t_algo *m, t_bool init)
 		m->g0 = 0x1f83d9ab;
 		m->h0 = 0x5be0cd19;
 	}
-	else
+	else if (algo == SHA224)
 	{
-		m->a = m->a0;
-		m->b = m->b0;
-		m->c = m->c0;
-		m->d = m->d0;
-		m->e = m->e0;
-		m->f = m->f0;
-		m->g = m->g0;
-		m->h = m->h0;
+		m->a0 = 0xc1059ed8;
+		m->b0 = 0x367cd507;
+		m->c0 = 0x3070dd17;
+		m->d0 = 0xf70e5939;
+		m->e0 = 0xffc00b31;
+		m->f0 = 0x68581511;
+		m->g0 = 0x64f98fa7;
+		m->h0 = 0xbefa4fa4;
 	}
+}
+
+static void		initialize_loop(t_algo *m)
+{
+	m->a = m->a0;
+	m->b = m->b0;
+	m->c = m->c0;
+	m->d = m->d0;
+	m->e = m->e0;
+	m->f = m->f0;
+	m->g = m->g0;
+	m->h = m->h0;
 }
 
 static void		schedule_array(uint32_t *meta, t_algo *m, uint32_t block_index)
@@ -82,17 +94,17 @@ static void		main_loop(t_algo *m)
 	}
 }
 
-t_algo			hash_256(uint32_t *meta, size_t blocks)
+t_algo			hash_sha2(uint32_t *meta, size_t blocks, t_name algo)
 {
 	t_algo		m;
 	uint32_t	j;
 
-	initialize_vars(&m, TRUE);
+	initialize_vars(&m, algo);
 	j = 0;
 	while (j < blocks)
 	{
 		schedule_array(meta, &m, j);
-		initialize_vars(&m, FALSE);
+		initialize_loop(&m);
 		main_loop(&m);
 		m.a0 += m.a;
 		m.b0 += m.b;

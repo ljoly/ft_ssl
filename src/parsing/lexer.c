@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 19:05:48 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/10 19:46:17 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/11 14:08:41 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,15 @@ t_bool		lex_file(char *arg, t_flags *flags)
 
 t_bool		lex_hashname(char *arg, t_flags *flags)
 {
-	if (ft_strequ("md5", arg) || ft_strequ("sha256", arg))
+	if (ft_strequ("md5", arg) || ft_strequ("sha256", arg) ||
+		ft_strequ("sha224", arg))
 	{
 		if (ft_strequ("md5", arg))
 			flags->algo = MD5;
 		else if (ft_strequ("sha256", arg))
 			flags->algo = SHA256;
+		else if (ft_strequ("sha224", arg))
+			flags->algo = SHA224;
 		return (TRUE);
 	}
 	return (FALSE);
