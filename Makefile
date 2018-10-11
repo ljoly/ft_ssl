@@ -6,14 +6,14 @@
 #    By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/03 19:54:48 by ljoly             #+#    #+#              #
-#    Updated: 2018/10/11 15:03:16 by ljoly            ###   ########.fr        #
+#    Updated: 2018/10/11 19:17:00 by ljoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ssl
 
 SRC_SSL = main.c md5.c tables.c error.c get_format.c build_meta.c \
-		handle_hash.c print.c sha2.c bitwise_op.c \
+		handle_input.c print.c sha2.c bitwise_op.c \
 
 SRC_PARSING = parser.c lexer.c read_fd.c state_a.c state_b.c state_c.c\
 

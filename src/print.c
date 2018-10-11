@@ -6,11 +6,12 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 15:45:30 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/11 14:20:21 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/11 18:51:27 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
+#define V256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 
 void		print_sha224(t_algo a, t_flags *flags, char *arg)
 {
@@ -30,10 +31,8 @@ void		print_sha224(t_algo a, t_flags *flags, char *arg)
 				a.d0, a.e0, a.f0, a.g0, arg);
 	}
 	else if (flags->s)
-	{
 		ft_printf("SHA224 (\"%s\") = %.8x%.8x%.8x%.8x%.8x%.8x%.8x\n",
 			arg, a.a0, a.b0, a.c0, a.d0, a.e0, a.f0, a.g0);
-	}
 	else
 		ft_printf("SHA224 (%s) = %.8x%.8x%.8x%.8x%.8x%.8x%.8x\n", arg,
 			a.a0, a.b0, a.c0, a.d0, a.e0, a.f0, a.g0);
@@ -58,10 +57,8 @@ void		print_sha256(t_algo a, t_flags *flags, char *arg)
 				a.d0, a.e0, a.f0, a.g0, a.h0, arg);
 	}
 	else if (flags->s)
-	{
 		ft_printf("SHA256 (\"%s\") = %.8x%.8x%.8x%.8x%.8x%.8x%.8x%.8x\n",
 			arg, a.a0, a.b0, a.c0, a.d0, a.e0, a.f0, a.g0, a.h0);
-	}
 	else
 		ft_printf("SHA256 (%s) = %.8x%.8x%.8x%.8x%.8x%.8x%.8x%.8x\n", arg,
 			a.a0, a.b0, a.c0, a.d0, a.e0, a.f0, a.g0, a.h0);
