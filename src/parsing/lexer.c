@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 19:05:48 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/11 19:13:28 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/11 19:39:01 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,9 @@ t_bool		lex_hashname(char *arg, t_flags *flags)
 		return (TRUE);
 	}
 	return (FALSE);
+}
+
+t_bool		lex_illegal_opt(char *arg)
+{
+	return (arg[0] == '-');
 }

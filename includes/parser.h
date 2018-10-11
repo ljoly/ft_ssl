@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 20:43:00 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/11 14:06:27 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/11 19:34:41 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ t_bool			lex_hashname(char *arg, t_flags *flags);
 t_bool			lex_flags_pqr(char *arg, t_flags *flags);
 t_bool			lex_flag_s(char *arg);
 t_bool			lex_file(char *arg, t_flags *flags);
+t_bool			lex_illegal_opt(char *arg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 18:08:52 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/10 20:08:27 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/11 19:37:22 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void			err_usage(t_usage err_code, t_flags *flags)
 	{
 		print_err(TRUE, flags);
 		ft_putendl_fd(": Illegal option", STDERR);
+		print_err(FALSE, flags);
+		exit(1);
 	}
 	else if (err_code == IS_DIRECTORY)
 	{

@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 17:44:56 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/11 19:15:37 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/11 19:25:17 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int				main(int argc, char **argv)
 	}
 	handle_args(END, NULL, &flags);
 	if (flags.input || ((flags.r || flags.q) && !flags.input &&
-		flags.hashes == 1))
+		flags.hashes == 1 && flags.stdin_open))
 	{
 		handle_input(argv[i], &flags);
 	}
