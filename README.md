@@ -21,10 +21,3 @@ Flags
     	Reverse the format of the output<br/>
 + -s<br/>
     	Print the sum of the given string<br/>
-
-
-
- -p, echo STDIN to STDOUT and append the checksum to STDOUT
-• -q, quiet mode
-• -r, reverse the format of the output.
-• -s, print the sum of the given string
