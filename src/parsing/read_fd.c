@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 19:45:22 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/11 19:16:08 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/15 12:32:56 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void				read_fd(t_flags *flags, int fd)
 		}
 		flags->size = input.st_size;
 		free(flags->input);
-		if (!(flags->input = (char*)ft_memalloc(sizeof(char) * flags->size)))
+		if (!(flags->input = (char*)malloc(sizeof(char) * flags->size)))
 			err_sys(MALLOC);
 		ret = read(fd, flags->input, flags->size);
 		if (ret == -1)
