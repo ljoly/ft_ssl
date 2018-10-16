@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 20:43:00 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/11 19:34:41 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/15 15:28:22 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct	s_flags
 	t_bool		error;
 	char		*input;
 	size_t		size;
-	int			hashes;
+	size_t		hashes;
 }				t_flags;
 
 void			handle_args(int action, char *arg, t_flags *flags);
