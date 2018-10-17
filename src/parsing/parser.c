@@ -6,11 +6,11 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 20:01:27 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/11 19:14:44 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/17 20:06:26 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ssl.h"
+#include "parser.h"
 
 static void			*state_final(t_flags *flags)
 {
@@ -32,7 +32,7 @@ static void			*state_final(t_flags *flags)
 
 static void			*state_initial(char *arg, t_flags *flags)
 {
-	if (lex_hashname(arg, flags))
+	if (lex_hashname(arg))
 	{
 		return (&state_a);
 	}
@@ -53,7 +53,7 @@ void				handle_args(int action, char *arg, t_flags *flags)
 
 	if (action == START)
 	{
-		state = &(state_initial);
+		state = state_initial(arg, flags);
 	}
 	else if (action == USE)
 	{

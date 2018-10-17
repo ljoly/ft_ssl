@@ -1,20 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sha2.c                                             :+:      :+:    :+:   */
+/*   sha256.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 14:11:57 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/11 14:54:41 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/17 17:42:39 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static void		initialize_vars(t_algo *m, t_name algo)
+static void		print(t_algo a, t_flags *flags, char *arg)
 {
-	if (algo == SHA256)
+	if (flags->q || flags->p || (!flags->q && !flags->p && !flags->s &&
+		!flags->file_open))
+	{
+		ft_printf("%.8x%.8x%.8x%.8x%.8x%.8x%.8x%.8x\n", a.a0, a.b0, a.c0, a.d0,
+			a.e0, a.f0, a.g0, a.h0);
+	}
+	else if (flags->r)
+	{
+		if (flags->s)
+			ft_printf("%.8x%.8x%.8x%.8x%.8x%.8x%.8x%.8x \"%s\"\n", a.a0, a.b0,
+				a.c0, a.d0, a.e0, a.f0, a.g0, a.h0, arg);
+		else
+			ft_printf("%.8x%.8x%.8x%.8x%.8x%.8x%.8x%.8x %s\n", a.a0, a.b0, a.c0,
+				a.d0, a.e0, a.f0, a.g0, a.h0, arg);
+	}
+	else if (flags->s)
+		ft_printf("SHA256 (\"%s\") = %.8x%.8x%.8x%.8x%.8x%.8x%.8x%.8x\n",
+			arg, a.a0, a.b0, a.c0, a.d0, a.e0, a.f0, a.g0, a.h0);
+	else
+		ft_printf("SHA256 (%s) = %.8x%.8x%.8x%.8x%.8x%.8x%.8x%.8x\n", arg,
+			a.a0, a.b0, a.c0, a.d0, a.e0, a.f0, a.g0, a.h0);
+	flags->s = FALSE;
+}
+
+static void		initialize(t_algo *m, t_bool loop)
+{
+	if (!loop)
 	{
 		m->a0 = 0x6a09e667;
 		m->b0 = 0xbb67ae85;
@@ -25,29 +51,17 @@ static void		initialize_vars(t_algo *m, t_name algo)
 		m->g0 = 0x1f83d9ab;
 		m->h0 = 0x5be0cd19;
 	}
-	else if (algo == SHA224)
+	else
 	{
-		m->a0 = 0xc1059ed8;
-		m->b0 = 0x367cd507;
-		m->c0 = 0x3070dd17;
-		m->d0 = 0xf70e5939;
-		m->e0 = 0xffc00b31;
-		m->f0 = 0x68581511;
-		m->g0 = 0x64f98fa7;
-		m->h0 = 0xbefa4fa4;
+		m->a = m->a0;
+		m->b = m->b0;
+		m->c = m->c0;
+		m->d = m->d0;
+		m->e = m->e0;
+		m->f = m->f0;
+		m->g = m->g0;
+		m->h = m->h0;
 	}
-}
-
-static void		initialize_loop(t_algo *m)
-{
-	m->a = m->a0;
-	m->b = m->b0;
-	m->c = m->c0;
-	m->d = m->d0;
-	m->e = m->e0;
-	m->f = m->f0;
-	m->g = m->g0;
-	m->h = m->h0;
 }
 
 static void		schedule_array(uint32_t *meta, t_algo *m, uint32_t block_index)
@@ -94,17 +108,17 @@ static void		main_loop(t_algo *m)
 	}
 }
 
-t_algo			hash_sha2(uint32_t *meta, size_t blocks, t_name algo)
+void			hash_sha256(uint32_t *meta, size_t blocks, t_flags *flags, char *arg)
 {
 	t_algo		m;
 	uint32_t	j;
 
-	initialize_vars(&m, algo);
+	initialize(&m, FALSE);
 	j = 0;
 	while (j < blocks)
 	{
 		schedule_array(meta, &m, j);
-		initialize_loop(&m);
+		initialize(&m, TRUE);
 		main_loop(&m);
 		m.a0 += m.a;
 		m.b0 += m.b;
@@ -116,5 +130,5 @@ t_algo			hash_sha2(uint32_t *meta, size_t blocks, t_name algo)
 		m.h0 += m.h;
 		j++;
 	}
-	return (m);
+	print(m, flags, arg);
 }

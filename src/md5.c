@@ -6,15 +6,39 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 19:13:19 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/11 12:43:09 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/17 17:48:44 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static void		initialize(t_algo *m, t_bool init)
+static void		print(t_algo a, t_flags *flags, char *arg)
 {
-	if (init)
+	if (flags->q || flags->p || (!flags->q && !flags->p && !flags->s &&
+		!flags->file_open))
+	{
+		ft_printf("%.8x%.8x%.8x%.8x\n", a.a0, a.b0, a.c0, a.d0);
+	}
+	else if (flags->r)
+	{
+		if (flags->s)
+			ft_printf("%.8x%.8x%.8x%.8x \"%s\"\n", a.a0, a.b0, a.c0, a.d0, arg);
+		else
+			ft_printf("%.8x%.8x%.8x%.8x %s\n", a.a0, a.b0, a.c0, a.d0, arg);
+	}
+	else if (flags->s)
+	{
+		ft_printf("MD5 (\"%s\") = %.8x%.8x%.8x%.8x\n", arg, a.a0, a.b0, a.c0,
+			a.d0);
+	}
+	else
+		ft_printf("MD5 (%s) = %.8x%.8x%.8x%.8x\n", arg, a.a0, a.b0, a.c0, a.d0);
+	flags->s = FALSE;
+}
+
+static void		initialize(t_algo *m, t_bool loop)
+{
+	if (!loop)
 	{
 		m->a0 = 0x67452301;
 		m->b0 = 0xEFCDAB89;
@@ -69,16 +93,16 @@ static void		main_loop(t_algo *m, uint32_t *meta, uint32_t block_index)
 	}
 }
 
-t_algo			hash_md5(uint32_t *meta, size_t blocks)
+void			hash_md5(uint32_t *meta, size_t blocks, t_flags *flags, char *arg)
 {
 	t_algo		m;
 	uint32_t	i;
 
-	initialize(&m, TRUE);
+	initialize(&m, FALSE);
 	i = 0;
 	while (i < blocks)
 	{
-		initialize(&m, FALSE);
+		initialize(&m, TRUE);
 		main_loop(&m, meta, i);
 		m.a0 += m.a;
 		m.b0 += m.b;
@@ -90,5 +114,5 @@ t_algo			hash_md5(uint32_t *meta, size_t blocks)
 	m.b0 = swap_bytes_32bit(m.b0);
 	m.c0 = swap_bytes_32bit(m.c0);
 	m.d0 = swap_bytes_32bit(m.d0);
-	return (m);
+	print(m, flags, arg);
 }

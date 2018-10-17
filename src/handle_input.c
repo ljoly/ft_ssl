@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 17:59:14 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/11 19:10:55 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/17 20:18:12 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ static void		get_env(t_env *e, t_flags *flags)
 void			handle_input(char *arg, t_flags *flags)
 {
 	t_env		e;
-	t_algo		a;
 
-	a.a = 0;
 	if (!flags->input)
 	{
 		flags->size = 0;
@@ -40,17 +38,17 @@ void			handle_input(char *arg, t_flags *flags)
 	get_env(&e, flags);
 	get_format(&e);
 	build_meta(&e, flags);
-	if (flags->algo == MD5)
-	{
-		a = hash_md5(e.meta_block, e.blocks);
-		print_md5(a, flags, arg);
-	}
-	else if (flags->algo == SHA256 || flags->algo == SHA224)
-	{
-		a = hash_sha2(e.meta_block, e.blocks, flags->algo);
-		flags->algo == SHA256 ? print_sha256(a, flags, arg) :
-		print_sha224(a, flags, arg);
-	}
+	g_hash.hash(e.meta_block, e.blocks, flags, arg);
+	// if (flags->algo == MD5)
+	// {
+	// 	hash_md5(e.meta_block, e.blocks, flags, arg);
+	// }
+	// else if (flags->algo == SHA256 || flags->algo == SHA224)
+	// {
+	// 	;
+	// 	flags->algo == SHA256 ? hash_sha256(e.meta_block, e.blocks, flags, arg) :
+	// 	hash_sha224(e.meta_block, e.blocks, flags, arg);
+	// }
 	free_memory(&e, flags);
 	flags->hashes++;
 }
