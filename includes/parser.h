@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 20:43:00 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/17 20:19:50 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/18 12:28:37 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "error.h"
 # include "sys/stat.h"
 
+/*
+** Parsing using a state-machine
+*/
 typedef enum	e_run
 {
 	START,

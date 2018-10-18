@@ -6,7 +6,7 @@
 #    By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/03 19:54:48 by ljoly             #+#    #+#              #
-#    Updated: 2018/10/17 17:52:13 by ljoly            ###   ########.fr        #
+#    Updated: 2018/10/18 14:13:46 by ljoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ $(NAME): obj $(OBJ)
 	@printf "\n$(GREEN)[✓]$(NC)\x1B[32mExecutable $(NAME) ready !\x1B[37m\n"
 
 obj:
-	# @make -C $(LIBFT)
+	@make -C $(LIBFT)
 	@printf "\n\x1B[38;5;208mCompiling $(NAME)...\n\x1b[37m"
 
 %.o: %.c
@@ -52,12 +52,12 @@ obj:
 	@printf "\e[38;5;208m▒\e[0m"
 
 clean:
-	# @make -C $(LIBFT) clean
+	@make -C $(LIBFT) clean
 	@rm -rf $(OBJ)
 	@printf "$(RED)[-]$(NC)Obj files deleted\n"
 
 fclean: clean
-	# @make -C $(LIBFT) fclean
+	@make -C $(LIBFT) fclean
 	@rm -f $(NAME)
 	@printf "$(RED)[-]$(NC)Executable $(NAME) deleted\n"
 

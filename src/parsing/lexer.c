@@ -6,18 +6,18 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 19:05:48 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/17 20:18:49 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/18 13:48:29 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-t_bool		lex_flag_s(char *arg)
+t_bool				lex_flag_s(char *arg)
 {
 	return (ft_strequ("-s", arg));
 }
 
-t_bool		lex_flags_pqr(char *arg, t_flags *flags)
+t_bool				lex_flags_pqr(char *arg, t_flags *flags)
 {
 	if (!ft_strequ("-p", arg) && !ft_strequ("-q", arg) && !ft_strequ("-r", arg))
 		return (FALSE);
@@ -46,9 +46,9 @@ t_bool		lex_flags_pqr(char *arg, t_flags *flags)
 	return (TRUE);
 }
 
-t_bool		lex_file(char *arg, t_flags *flags)
+t_bool				lex_file(char *arg, t_flags *flags)
 {
-	int		fd;
+	int				fd;
 
 	flags->file_open = TRUE;
 	flags->input = ft_strdup(arg);
@@ -61,8 +61,8 @@ t_bool		lex_file(char *arg, t_flags *flags)
 	return (TRUE);
 }
 
-static 	t_hash		g_hashes[] = {{"md5", hash_md5}, {"sha224", hash_sha224},
-	{"sha256", hash_sha256}};
+static t_hash		g_hashes[] = {{"md5", md5}, {"sha224", sha224},
+	{"sha256", sha256}};
 
 t_bool				lex_hashname(char *arg)
 {
@@ -79,21 +79,10 @@ t_bool				lex_hashname(char *arg)
 		}
 		i++;
 	}
-	// if (ft_strequ("md5", arg) || ft_strequ("sha256", arg) ||
-	// 	ft_strequ("sha224", arg))
-	// {
-	// 	if (ft_strequ("md5", arg))
-	// 		flags->algo = MD5;
-	// 	else if (ft_strequ("sha256", arg))
-	// 		flags->algo = SHA256;
-	// 	else if (ft_strequ("sha224", arg))
-	// 		flags->algo = SHA224;
-	// 	return (TRUE);
-	// }
 	return (FALSE);
 }
 
-t_bool		lex_illegal_opt(char *arg)
+t_bool				lex_illegal_opt(char *arg)
 {
 	return (arg[0] == '-');
 }

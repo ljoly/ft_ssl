@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 16:40:15 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/17 17:48:28 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/18 13:50:24 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static void		main_loop(t_algo *m)
 	}
 }
 
-void			hash_sha224(uint32_t *meta, size_t blocks, t_flags *flags, char *arg)
+void			sha224(uint32_t *meta, size_t blocks, t_flags *flags, char *arg)
 {
 	t_algo		m;
 	uint32_t	j;

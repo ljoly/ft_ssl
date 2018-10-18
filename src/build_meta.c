@@ -6,13 +6,13 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 14:50:41 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/11 13:00:40 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/18 12:41:52 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static void		add_size(t_env *e, t_flags *flags)
+static void		add_size(t_env *e)
 {
 	size_t		size;
 	size_t		index;
@@ -23,7 +23,7 @@ static void		add_size(t_env *e, t_flags *flags)
 		size = e->input_bitsize - 64;
 	}
 	index = e->blocks * 16 - 2;
-	if (flags->algo == MD5)
+	if (ft_strequ("md5", g_hash.name))
 	{
 		e->meta_block[index + 1] = (size >> 32) & 0xffffffff;
 		e->meta_block[index] = size & 0xffffffff;
@@ -57,7 +57,7 @@ static void		add_padding(t_env *e)
 	e->meta_block[index] = e->meta_block[index] | pad;
 }
 
-void			build_meta(t_env *e, t_flags *flags)
+void			build_meta(t_env *e)
 {
 	size_t		i;
 
@@ -68,7 +68,7 @@ void			build_meta(t_env *e, t_flags *flags)
 	}
 	ft_memcpy(e->meta_block, e->input, e->input_len);
 	add_padding(e);
-	if (!(flags->algo == MD5))
+	if (!ft_strequ("md5", g_hash.name))
 	{
 		i = 0;
 		while (i < e->blocks * 16)
@@ -77,5 +77,5 @@ void			build_meta(t_env *e, t_flags *flags)
 			i++;
 		}
 	}
-	add_size(e, flags);
+	add_size(e);
 }

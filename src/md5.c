@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 19:13:19 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/17 17:48:44 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/18 13:44:55 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void		main_loop(t_algo *m, uint32_t *meta, uint32_t block_index)
 	}
 }
 
-void			hash_md5(uint32_t *meta, size_t blocks, t_flags *flags, char *arg)
+void			md5(uint32_t *meta, size_t blocks, t_flags *flags, char *arg)
 {
 	t_algo		m;
 	uint32_t	i;
