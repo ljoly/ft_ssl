@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 20:02:57 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/18 13:22:58 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/21 17:02:05 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,8 @@
 
 # include "libft.h"
 
-typedef enum	e_name
-{
-	MD5,
-	SHA224,
-	SHA256,
-}				t_name;
-
 typedef struct	s_flags
 {
-	t_name		algo;
 	t_bool		p;
 	t_bool		q;
 	t_bool		r;
