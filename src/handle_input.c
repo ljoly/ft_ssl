@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 17:59:14 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/18 12:38:05 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/21 17:07:26 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void			handle_input(char *arg, t_flags *flags)
 	get_env(&e, flags);
 	get_format(&e);
 	build_meta(&e);
-	g_hash.hash(e.meta_block, e.blocks, flags, arg);
+	g_hash.hash(e, flags, arg);
 	free_memory(&e, flags);
 	flags->hashes++;
 }

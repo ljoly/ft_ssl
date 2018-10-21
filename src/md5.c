@@ -6,14 +6,16 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 19:13:19 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/18 13:44:55 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/21 17:33:36 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static void		print(t_algo a, t_flags *flags, char *arg)
+static void		print(t_algo a, t_flags *flags, char *arg, char *input)
 {
+	if (flags->p)
+		ft_printf("%s", input);
 	if (flags->q || flags->p || (!flags->q && !flags->p && !flags->s &&
 		!flags->file_open))
 	{
@@ -93,17 +95,17 @@ static void		main_loop(t_algo *m, uint32_t *meta, uint32_t block_index)
 	}
 }
 
-void			md5(uint32_t *meta, size_t blocks, t_flags *flags, char *arg)
+void			md5(t_env e, t_flags *flags, char *arg)
 {
 	t_algo		m;
 	uint32_t	i;
 
 	initialize(&m, FALSE);
 	i = 0;
-	while (i < blocks)
+	while (i < e.blocks)
 	{
 		initialize(&m, TRUE);
-		main_loop(&m, meta, i);
+		main_loop(&m, e.meta_block, i);
 		m.a0 += m.a;
 		m.b0 += m.b;
 		m.c0 += m.c;
@@ -114,5 +116,5 @@ void			md5(uint32_t *meta, size_t blocks, t_flags *flags, char *arg)
 	m.b0 = swap_bytes_32bit(m.b0);
 	m.c0 = swap_bytes_32bit(m.c0);
 	m.d0 = swap_bytes_32bit(m.d0);
-	print(m, flags, arg);
+	print(m, flags, arg, e.input);
 }

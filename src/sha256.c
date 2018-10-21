@@ -6,14 +6,16 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 14:11:57 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/18 13:44:47 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/21 17:36:45 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static void		print(t_algo a, t_flags *flags, char *arg)
+static void		print(t_algo a, t_flags *flags, char *arg, char *input)
 {
+	if (flags->p)
+		ft_printf("%s", input);
 	if (flags->q || flags->p || (!flags->q && !flags->p && !flags->s &&
 		!flags->file_open))
 	{
@@ -108,16 +110,16 @@ static void		main_loop(t_algo *m)
 	}
 }
 
-void			sha256(uint32_t *meta, size_t blocks, t_flags *flags, char *arg)
+void			sha256(t_env e, t_flags *flags, char *arg)
 {
 	t_algo		m;
 	uint32_t	j;
 
 	initialize(&m, FALSE);
 	j = 0;
-	while (j < blocks)
+	while (j < e.blocks)
 	{
-		schedule_array(meta, &m, j);
+		schedule_array(e.meta_block, &m, j);
 		initialize(&m, TRUE);
 		main_loop(&m);
 		m.a0 += m.a;
@@ -130,5 +132,5 @@ void			sha256(uint32_t *meta, size_t blocks, t_flags *flags, char *arg)
 		m.h0 += m.h;
 		j++;
 	}
-	print(m, flags, arg);
+	print(m, flags, arg, e.input);
 }
