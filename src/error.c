@@ -6,13 +6,13 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 18:08:52 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/11 19:37:22 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/21 18:05:38 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static void		print_err(t_bool type, t_flags *flags)
+void			print_err(t_bool type, t_flags *flags)
 {
 	if (!type)
 	{

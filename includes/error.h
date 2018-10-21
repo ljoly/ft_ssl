@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 18:05:45 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/11 12:07:07 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/21 18:06:11 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ typedef enum	e_usage
 
 void			err_sys(t_sys err_code);
 void			err_usage(t_usage err_code, t_flags *flags);
+void			print_err(t_bool type, t_flags *flags);
 
 #endif
