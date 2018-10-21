@@ -6,16 +6,18 @@
 #    By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/03 19:54:48 by ljoly             #+#    #+#              #
-#    Updated: 2018/10/18 14:13:46 by ljoly            ###   ########.fr        #
+#    Updated: 2018/10/21 19:34:55 by ljoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ssl
 
-SRC_SSL = main.c md5.c tables.c error.c get_format.c build_meta.c \
-		handle_input.c sha224.c sha256.c bitwise_op.c \
+SRC_SSL = main.c md5.c tables.c error.c get_format.c build_meta_512.c \
+		build_meta_1024.c handle_input.c sha224.c sha256.c bitwise_op.c \
+		sha512.c \
 
-SRC_PARSING = parser.c lexer.c read_fd.c state_a.c state_b.c state_c.c\
+SRC_PARSING = parser.c lexer.c read_fd.c state_a.c state_b.c state_c.c \
+		handle_prompt.c \
 
 SSL_PATH = ./src/
 PARSING_PATH = ./src/parsing/

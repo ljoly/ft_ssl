@@ -6,13 +6,13 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 16:40:15 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/21 19:14:26 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/21 19:54:48 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static void		print(t_algo a, t_flags *flags, char *arg, char *input)
+static void		print(t_algo32 a, t_flags *flags, char *arg, char *input)
 {
 	if (flags->p)
 		ft_printf("%s", input);
@@ -40,7 +40,7 @@ static void		print(t_algo a, t_flags *flags, char *arg, char *input)
 	flags->s = FALSE;
 }
 
-static void		initialize(t_algo *m, t_bool loop)
+static void		initialize(t_algo32 *m, t_bool loop)
 {
 	if (!loop)
 	{
@@ -66,7 +66,7 @@ static void		initialize(t_algo *m, t_bool loop)
 	}
 }
 
-static void		schedule_array(uint32_t *meta, t_algo *m, uint32_t block_index)
+static void		schedule_array(uint32_t *meta, t_algo32 *m, uint32_t block_index)
 {
 	uint32_t	i;
 
@@ -83,7 +83,7 @@ static void		schedule_array(uint32_t *meta, t_algo *m, uint32_t block_index)
 	}
 }
 
-static void		main_loop(t_algo *m)
+static void		main_loop(t_algo32 *m)
 {
 	uint32_t	i;
 
@@ -112,11 +112,11 @@ static void		main_loop(t_algo *m)
 
 void			sha224(t_env *e, t_flags *flags, char *arg)
 {
-	t_algo		m;
+	t_algo32	m;
 	uint32_t	j;
 
 	get_format_512(e);
-	build_meta(e);
+	build_meta_512(e);
 	initialize(&m, FALSE);
 	j = 0;
 	while (j < e->blocks)
