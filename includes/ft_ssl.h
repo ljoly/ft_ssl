@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:03:23 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/21 17:58:39 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/21 19:11:59 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,15 @@ typedef struct	s_env
 	size_t		padding_bitsize;
 	size_t		input_bitsize;
 	size_t		blocks;
-	uint32_t	*meta_block;
+	uint32_t	*meta_512;
+	u_int64_t	*meta_1024;
 	char		*output;
 }				t_env;
 
 typedef struct	s_hash
 {
 	char		*name;
-	void		(*hash)(t_env e, t_flags *f, char *arg);
+	void		(*hash)(t_env *e, t_flags *f, char *arg);
 }				t_hash;
 
 t_hash			g_hash;
@@ -73,11 +74,12 @@ typedef struct	s_algo
 
 void			handle_prompt(t_flags *flags);
 void			handle_input(char *input, t_flags *flags);
-void			get_format(t_env *e);
+void			get_format_512(t_env *e);
+void			get_format_1024(t_env *e);
 void			build_meta(t_env *e);
-void			md5(t_env e, t_flags *f, char *arg);
-void			sha224(t_env e, t_flags *f, char *arg);
-void			sha256(t_env e, t_flags *f, char *arg);
+void			md5(t_env *e, t_flags *f, char *arg);
+void			sha224(t_env *e, t_flags *f, char *arg);
+void			sha256(t_env *e, t_flags *f, char *arg);
 
 uint32_t		swap_bytes_32bit(uint32_t value);
 uint32_t		left_rotate(uint32_t x, uint32_t c);

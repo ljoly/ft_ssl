@@ -6,18 +6,11 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 17:59:14 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/21 17:07:26 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/21 19:16:08 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
-
-static void		free_memory(t_env *e, t_flags *flags)
-{
-	free(e->meta_block);
-	free(flags->input);
-	flags->input = NULL;
-}
 
 static void		get_env(t_env *e, t_flags *flags)
 {
@@ -36,9 +29,8 @@ void			handle_input(char *arg, t_flags *flags)
 		flags->input = ft_strdup("");
 	}
 	get_env(&e, flags);
-	get_format(&e);
-	build_meta(&e);
-	g_hash.hash(e, flags, arg);
-	free_memory(&e, flags);
+	g_hash.hash(&e, flags, arg);
+	free(flags->input);
+	flags->input = NULL;
 	flags->hashes++;
 }

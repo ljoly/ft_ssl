@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 19:13:19 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/21 17:33:36 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/21 19:14:40 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,19 @@ static void		main_loop(t_algo *m, uint32_t *meta, uint32_t block_index)
 	}
 }
 
-void			md5(t_env e, t_flags *flags, char *arg)
+void			md5(t_env *e, t_flags *flags, char *arg)
 {
 	t_algo		m;
 	uint32_t	i;
 
+	get_format_512(e);
+	build_meta(e);
 	initialize(&m, FALSE);
 	i = 0;
-	while (i < e.blocks)
+	while (i < e->blocks)
 	{
 		initialize(&m, TRUE);
-		main_loop(&m, e.meta_block, i);
+		main_loop(&m, e->meta_512, i);
 		m.a0 += m.a;
 		m.b0 += m.b;
 		m.c0 += m.c;
@@ -116,5 +118,6 @@ void			md5(t_env e, t_flags *flags, char *arg)
 	m.b0 = swap_bytes_32bit(m.b0);
 	m.c0 = swap_bytes_32bit(m.c0);
 	m.d0 = swap_bytes_32bit(m.d0);
-	print(m, flags, arg, e.input);
+	print(m, flags, arg, e->input);
+	free(e->meta_512);
 }

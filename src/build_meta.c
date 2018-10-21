@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 14:50:41 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/18 12:41:52 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/21 19:12:41 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ static void		add_size(t_env *e)
 	index = e->blocks * 16 - 2;
 	if (ft_strequ("md5", g_hash.name))
 	{
-		e->meta_block[index + 1] = (size >> 32) & 0xffffffff;
-		e->meta_block[index] = size & 0xffffffff;
+		e->meta_512[index + 1] = (size >> 32) & 0xffffffff;
+		e->meta_512[index] = size & 0xffffffff;
 	}
 	else
 	{
-		e->meta_block[index] = (size >> 32) & 0xffffffff;
-		e->meta_block[index + 1] = size & 0xffffffff;
+		e->meta_512[index] = (size >> 32) & 0xffffffff;
+		e->meta_512[index + 1] = size & 0xffffffff;
 	}
 }
 
@@ -54,26 +54,26 @@ static void		add_padding(t_env *e)
 	{
 		index++;
 	}
-	e->meta_block[index] = e->meta_block[index] | pad;
+	e->meta_512[index] = e->meta_512[index] | pad;
 }
 
 void			build_meta(t_env *e)
 {
 	size_t		i;
 
-	if (!(e->meta_block = (uint32_t*)ft_memalloc(sizeof(uint32_t) *
+	if (!(e->meta_512 = (uint32_t*)ft_memalloc(sizeof(uint32_t) *
 		e->blocks * 16)))
 	{
 		err_sys(MALLOC);
 	}
-	ft_memcpy(e->meta_block, e->input, e->input_len);
+	ft_memcpy(e->meta_512, e->input, e->input_len);
 	add_padding(e);
 	if (!ft_strequ("md5", g_hash.name))
 	{
 		i = 0;
 		while (i < e->blocks * 16)
 		{
-			e->meta_block[i] = swap_bytes_32bit(e->meta_block[i]);
+			e->meta_512[i] = swap_bytes_32bit(e->meta_512[i]);
 			i++;
 		}
 	}
