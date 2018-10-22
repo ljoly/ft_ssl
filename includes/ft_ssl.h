@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 18:03:23 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/21 20:27:27 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/22 13:30:08 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void			build_meta_1024(t_env *e);
 void			md5(t_env *e, t_flags *f, char *arg);
 void			sha224(t_env *e, t_flags *f, char *arg);
 void			sha256(t_env *e, t_flags *f, char *arg);
+void			sha384(t_env *e, t_flags *f, char *arg);
 void			sha512(t_env *e, t_flags *f, char *arg);
 
 #endif

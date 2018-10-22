@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 19:05:48 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/21 19:35:36 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/22 13:35:20 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_bool				lex_file(char *arg, t_flags *flags)
 }
 
 static t_hash		g_hashes[] = {{"md5", md5}, {"sha224", sha224},
-	{"sha256", sha256}, {"sha512", sha512}};
+	{"sha256", sha256}, {"sha512", sha512}, {"sha384", sha384}};
 
 t_bool				lex_hashname(char *arg)
 {
