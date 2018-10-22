@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 19:21:06 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/21 23:04:20 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/22 13:45:23 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		add_size(t_env *e)
 	{
 		size = e->input_bitsize - 128;
 	}
-    e->meta_1024[e->blocks * 16 - 1] = size;
+	e->meta_1024[e->blocks * 16 - 1] = size;
 }
 
 static void		add_padding(t_env *e)
@@ -39,18 +39,16 @@ static void		add_padding(t_env *e)
 		pad = 0x0000000000800000;
 	else if (last_bytes == 3)
 		pad = 0x0000000080000000;
-    else if (last_bytes == 4)
+	else if (last_bytes == 4)
 		pad = 0x0000008000000000;
 	else if (last_bytes == 5)
 		pad = 0x0000800000000000;
-    else if (last_bytes == 6)
+	else if (last_bytes == 6)
 		pad = 0x0080000000000000;
-    else if (last_bytes == 7)
+	else if (last_bytes == 7)
 		pad = 0x8000000000000000;
-    else if (last_bytes == 8)
-	{
+	else if (last_bytes == 8)
 		index++;
-	}
 	e->meta_1024[index] = e->meta_1024[index] | pad;
 }
 

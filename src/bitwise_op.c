@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/08 19:19:15 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/21 22:54:48 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/22 13:40:18 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ uint32_t	swap_bytes_32bit(uint32_t val)
 
 uint64_t	swap_bytes_64bit(uint64_t val)
 {
-    val = ((val << 8) & 0xFF00FF00FF00FF00ULL ) | ((val >> 8) & 0x00FF00FF00FF00FFULL );
-    val = ((val << 16) & 0xFFFF0000FFFF0000ULL ) | ((val >> 16) & 0x0000FFFF0000FFFFULL );
+	val = ((val << 8) & 0xFF00FF00FF00FF00ULL) |
+		((val >> 8) & 0x00FF00FF00FF00FFULL);
+	val = ((val << 16) & 0xFFFF0000FFFF0000ULL) |
+		((val >> 16) & 0x0000FFFF0000FFFFULL);
 	return (val << 32) | (val >> 32);
 }
 

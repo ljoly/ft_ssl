@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 13:29:06 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/22 13:34:41 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/22 13:52:20 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static void		print(t_algo64 a, t_flags *flags, char *arg, char *input)
 				a.d0, a.e0, a.f0, arg);
 	}
 	else if (flags->s)
-		ft_printf("SHA512 (\"%s\") = %.8lx%.8lx%.8lx%.8lx%.8lx%.8lx\n",
+		ft_printf("SHA384 (\"%s\") = %.8lx%.8lx%.8lx%.8lx%.8lx%.8lx\n",
 			arg, a.a0, a.b0, a.c0, a.d0, a.e0, a.f0);
 	else
-		ft_printf("SHA512 (%s) = %.8lx%.8lx%.8lx%.8lx%.8lx%.8lx\n", arg,
+		ft_printf("SHA384 (%s) = %.8lx%.8lx%.8lx%.8lx%.8lx%.8lx\n", arg,
 			a.a0, a.b0, a.c0, a.d0, a.e0, a.f0);
 	flags->s = FALSE;
 }
@@ -66,18 +66,18 @@ static void		initialize(t_algo64 *m, t_bool loop)
 	}
 }
 
-static void		schedule_array(uint64_t *meta, t_algo64 *m, uint64_t block_index)
+static void		schedule_array(uint64_t *meta, t_algo64 *m, uint64_t block)
 {
 	uint64_t	i;
 
-	ft_memcpy(m->w, &meta[block_index * 16], 16 * sizeof(uint64_t));
+	ft_memcpy(m->w, &meta[block * 16], 16 * sizeof(uint64_t));
 	i = 16;
 	while (i < 80)
 	{
-		m->s0 = right_rotate64(m->w[i - 15], 1) ^ right_rotate64(m->w[i - 15], 8)
-			^ (m->w[i - 15] >> 7);
-		m->s1 = right_rotate64(m->w[i - 2], 19) ^ right_rotate64(m->w[i - 2], 61)
-			^ (m->w[i - 2] >> 6);
+		m->s0 = right_rotate64(m->w[i - 15], 1)
+			^ right_rotate64(m->w[i - 15], 8) ^ (m->w[i - 15] >> 7);
+		m->s1 = right_rotate64(m->w[i - 2], 19)
+			^ right_rotate64(m->w[i - 2], 61) ^ (m->w[i - 2] >> 6);
 		m->w[i] = m->w[i - 16] + m->s0 + m->w[i - 7] + m->s1;
 		i++;
 	}

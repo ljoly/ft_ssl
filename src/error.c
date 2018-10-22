@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 18:08:52 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/21 18:05:38 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/22 15:23:44 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,27 @@ void			print_err(t_bool type, t_flags *flags)
 	}
 }
 
+static void		handle_wrong_cmd(t_flags *flags)
+{
+	ft_putendl_fd("Error: wrong command", STDERR);
+	print_err(FALSE, flags);
+	exit(0);
+}
+
+static void		handle_no_str(t_flags *flags)
+{
+	ft_putendl_fd("Error: option requires an argument -- s", STDERR);
+	print_err(FALSE, flags);
+}
+
 void			err_usage(t_usage err_code, t_flags *flags)
 {
 	flags->error_seen = TRUE;
 	flags->error = TRUE;
-	if (err_code == NOT_A_HASH || err_code == NO_STRING)
-	{
-		err_code == NOT_A_HASH ? ft_putendl_fd("Error: wrong command", STDERR) :
-		ft_putendl_fd("Error: option requires an argument -- s", STDERR);
-		print_err(FALSE, flags);
-	}
+	if (err_code == NOT_A_HASH)
+		handle_wrong_cmd(flags);
+	else if (err_code == NO_STRING)
+		handle_no_str(flags);
 	else if (err_code == NOT_A_FILE)
 	{
 		print_err(TRUE, flags);

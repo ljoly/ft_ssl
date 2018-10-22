@@ -6,7 +6,7 @@
 /*   By: ljoly <ljoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 16:40:15 by ljoly             #+#    #+#             */
-/*   Updated: 2018/10/21 19:54:48 by ljoly            ###   ########.fr       */
+/*   Updated: 2018/10/22 13:48:26 by ljoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ static void		initialize(t_algo32 *m, t_bool loop)
 	}
 }
 
-static void		schedule_array(uint32_t *meta, t_algo32 *m, uint32_t block_index)
+static void		schedule_array(uint32_t *meta, t_algo32 *m, uint32_t block)
 {
 	uint32_t	i;
 
-	ft_memcpy(m->w, &meta[block_index * 16], 16 * sizeof(uint32_t));
+	ft_memcpy(m->w, &meta[block * 16], 16 * sizeof(uint32_t));
 	i = 16;
 	while (i < 64)
 	{
