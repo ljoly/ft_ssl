@@ -3,12 +3,12 @@ ft_ssl
 
 Overview
 -------
-The goal of this project is to recode part of the OpenSSL program, specifically the cryptographic hash functions MD5, SHA-224 and SHA-256
+The goal of this project is to recode part of the OpenSSL program, specifically the cryptographic hash functions MD5, SHA-224, SHA-256, SHA-384 and SHA-512
 
 Usage
 -------
 ```
-ft_ssl [md5|sha224|sha256] [-pqr] [-s string] [files ...]
+ft_ssl [md5|sha224|sha256|sha384|sha512] [-pqr] [-s string] [files ...]
 ```
 
 Flags
